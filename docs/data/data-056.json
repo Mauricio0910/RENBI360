@@ -1,0 +1,102 @@
+{
+  "summary": {
+    "payables_total": 271900.0,
+    "receivables_total": 389700.0,
+    "payables_today": 48750.0,
+    "payables_today_count": 7,
+    "receivables_today": 62100.0,
+    "receivables_today_count": 11,
+    "overdue_payables": 18300.0,
+    "overdue_receivables": 84300.0,
+    "overdue_customers": 12,
+    "net_working_position": 117800.0
+  },
+  "payables": [
+    {
+      "due_date": "04/08/2026",
+      "counterparty": "Distribuidora Norte",
+      "description": "NF 98231",
+      "value": 22500.0,
+      "status": "Hoje"
+    },
+    {
+      "due_date": "04/08/2026",
+      "counterparty": "Energia Regional",
+      "description": "Energia elétrica",
+      "value": 8900.0,
+      "status": "Hoje"
+    },
+    {
+      "due_date": "04/08/2026",
+      "counterparty": "Transportadora Via Norte",
+      "description": "Fretes julho",
+      "value": 7350.0,
+      "status": "Hoje"
+    },
+    {
+      "due_date": "02/08/2026",
+      "counterparty": "Atacado Brasil",
+      "description": "NF 77401",
+      "value": 18300.0,
+      "status": "Vencido"
+    },
+    {
+      "due_date": "06/08/2026",
+      "counterparty": "Central Alimentos",
+      "description": "NF 55618",
+      "value": 31800.0,
+      "status": "A vencer"
+    },
+    {
+      "due_date": "10/08/2026",
+      "counterparty": "Prime Supply",
+      "description": "NF 11903",
+      "value": 27600.0,
+      "status": "A vencer"
+    }
+  ],
+  "receivables": [
+    {
+      "due_date": "04/08/2026",
+      "counterparty": "Mercado União",
+      "description": "Duplicata 18291",
+      "value": 18400.0,
+      "status": "Hoje"
+    },
+    {
+      "due_date": "04/08/2026",
+      "counterparty": "Comercial Tocantins",
+      "description": "Duplicata 18322",
+      "value": 24300.0,
+      "status": "Hoje"
+    },
+    {
+      "due_date": "04/08/2026",
+      "counterparty": "Supermercado Central",
+      "description": "Duplicata 18331",
+      "value": 19400.0,
+      "status": "Hoje"
+    },
+    {
+      "due_date": "25/07/2026",
+      "counterparty": "Varejão Popular",
+      "description": "Duplicata 17652",
+      "value": 28600.0,
+      "status": "Vencido"
+    },
+    {
+      "due_date": "18/07/2026",
+      "counterparty": "Comercial Araguaia",
+      "description": "Duplicata 17208",
+      "value": 24100.0,
+      "status": "Vencido"
+    },
+    {
+      "due_date": "08/08/2026",
+      "counterparty": "Mercantil Norte",
+      "description": "Duplicata 18410",
+      "value": 33100.0,
+      "status": "A vencer"
+    }
+  ]
+}

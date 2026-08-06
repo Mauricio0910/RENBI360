@@ -1,0 +1,44 @@
+{
+  "assets": [
+    {
+      "label": "Caixa e equivalentes",
+      "value": 522800.0
+    },
+    {
+      "label": "Contas a receber",
+      "value": 389700.0
+    },
+    {
+      "label": "Estoques",
+      "value": 914300.0
+    },
+    {
+      "label": "Imobilizado e outros",
+      "value": 685300.0
+    }
+  ],
+  "liabilities": [
+    {
+      "label": "Fornecedores",
+      "value": 271900.0
+    },
+    {
+      "label": "Obrigações de curto prazo",
+      "value": 218400.0
+    },
+    {
+      "label": "Passivos de longo prazo",
+      "value": 794270.0
+    }
+  ],
+  "equity": [
+    {
+      "label": "Patrimônio líquido",
+      "value": 1227530.0
+    }
+  ],
+  "totals": {
+    "assets": 2512100.0,
+    "liabilities_equity": 2512100.0
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "period": "90d",
+  "lines": [
+    {
+      "code": "01",
+      "label": "Receita Bruta",
+      "value": 3674814.0,
+      "level": 0
+    },
+    {
+      "code": "02",
+      "label": "(-) Deduções e impostos sobre vendas",
+      "value": -264586.61,
+      "level": 1
+    },
+    {
+      "code": "03",
+      "label": "Receita Líquida",
+      "value": 3410227.39,
+      "level": 0
+    },
+    {
+      "code": "04",
+      "label": "(-) CMV/CPV",
+      "value": -2059777.34,
+      "level": 1
+    },
+    {
+      "code": "05",
+      "label": "Lucro Bruto",
+      "value": 1350450.05,
+      "level": 0
+    },
+    {
+      "code": "06",
+      "label": "(-) Despesas Operacionais",
+      "value": -665771.87,
+      "level": 1
+    },
+    {
+      "code": "07",
+      "label": "EBITDA",
+      "value": 684678.17,
+      "level": 0
+    },
+    {
+      "code": "08",
+      "label": "(-) Depreciação/Amortização",
+      "value": -43819.4,
+      "level": 1
+    },
+    {
+      "code": "09",
+      "label": "EBIT",
+      "value": 640858.77,
+      "level": 0
+    },
+    {
+      "code": "10",
+      "label": "Resultado Financeiro",
+      "value": -52550.42,
+      "level": 1
+    },
+    {
+      "code": "11",
+      "label": "IR/CSLL estimados",
+      "value": -81186.55,
+      "level": 1
+    },
+    {
+      "code": "12",
+      "label": "Lucro Líquido",
+      "value": 507121.8,
+      "level": 0
+    }
+  ],
+  "margins": {
+    "gross_pct": 39.6,
+    "ebitda_pct": 20.1,
+    "net_pct": 14.9
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "dimension": "cost_center",
+  "metric": "cost",
+  "rows": [
+    {
+      "dimension": "Administrativo",
+      "value": 62600.0,
+      "secondary": 96.3
+    },
+    {
+      "dimension": "Comercial",
+      "value": 66700.0,
+      "secondary": 95.3
+    },
+    {
+      "dimension": "Logística",
+      "value": 63100.0,
+      "secondary": 92.8
+    },
+    {
+      "dimension": "Operações",
+      "value": 77100.0,
+      "secondary": 96.4
+    },
+    {
+      "dimension": "Marketing",
+      "value": 27900.0,
+      "secondary": 93.0
+    }
+  ]
+}

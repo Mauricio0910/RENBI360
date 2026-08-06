@@ -1,0 +1,27 @@
+{
+  "inventory_value": 914300.0,
+  "sku_count": 4862,
+  "turnover": 5.4,
+  "coverage_days": 37,
+  "stockout_risk_items": 23,
+  "overstock_items": 18,
+  "dead_stock_value": 48620.0,
+  "loss_pct": 0.74,
+  "abc": [
+    {
+      "class": "A",
+      "sku_pct": 18,
+      "revenue_pct": 72
+    },
+    {
+      "class": "B",
+      "sku_pct": 29,
+      "revenue_pct": 20
+    },
+    {
+      "class": "C",
+      "sku_pct": 53,
+      "revenue_pct": 8
+    }
+  ]
+}

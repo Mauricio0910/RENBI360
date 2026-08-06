@@ -1,0 +1,111 @@
+{
+  "assumptions": {
+    "revenue_monthly_growth_pct": 1.2,
+    "expense_monthly_growth_pct": 0.8,
+    "seasonality_applied": true
+  },
+  "months": [
+    {
+      "month": "2026-08",
+      "inflows": 1170000.0,
+      "outflows": 875000.0,
+      "net": 295000.0,
+      "ending_cash": 817800.0,
+      "scenario": "base"
+    },
+    {
+      "month": "2026-09",
+      "inflows": 1184040.0,
+      "outflows": 882000.0,
+      "net": 302040.0,
+      "ending_cash": 1119840.0,
+      "scenario": "base"
+    },
+    {
+      "month": "2026-10",
+      "inflows": 1198248.48,
+      "outflows": 889056.0,
+      "net": 309192.48,
+      "ending_cash": 1429032.48,
+      "scenario": "base"
+    },
+    {
+      "month": "2026-11",
+      "inflows": 1321763.93,
+      "outflows": 932015.19,
+      "net": 389748.75,
+      "ending_cash": 1818781.23,
+      "scenario": "base"
+    },
+    {
+      "month": "2026-12",
+      "inflows": 1337625.1,
+      "outflows": 939471.31,
+      "net": 398153.79,
+      "ending_cash": 2216935.02,
+      "scenario": "base"
+    },
+    {
+      "month": "2027-01",
+      "inflows": 1241905.14,
+      "outflows": 910564.5,
+      "net": 331340.64,
+      "ending_cash": 2548275.66,
+      "scenario": "base"
+    },
+    {
+      "month": "2027-02",
+      "inflows": 1256808.0,
+      "outflows": 917849.01,
+      "net": 338958.99,
+      "ending_cash": 2887234.65,
+      "scenario": "base"
+    },
+    {
+      "month": "2027-03",
+      "inflows": 1271889.7,
+      "outflows": 925191.81,
+      "net": 346697.89,
+      "ending_cash": 3233932.54,
+      "scenario": "base"
+    },
+    {
+      "month": "2027-04",
+      "inflows": 1287152.37,
+      "outflows": 932593.34,
+      "net": 354559.03,
+      "ending_cash": 3588491.57,
+      "scenario": "base"
+    },
+    {
+      "month": "2027-05",
+      "inflows": 1302598.2,
+      "outflows": 940054.09,
+      "net": 362544.11,
+      "ending_cash": 3951035.69,
+      "scenario": "base"
+    },
+    {
+      "month": "2027-06",
+      "inflows": 1318229.38,
+      "outflows": 947574.52,
+      "net": 370654.86,
+      "ending_cash": 4321690.55,
+      "scenario": "base"
+    },
+    {
+      "month": "2027-07",
+      "inflows": 1334048.13,
+      "outflows": 955155.12,
+      "net": 378893.02,
+      "ending_cash": 4700583.56,
+      "scenario": "base"
+    }
+  ],
+  "guidance": [
+    "Definir limite mínimo de caixa operacional e gatilho de contingência.",
+    "Revisar despesas variáveis por centro de custo mensalmente.",
+    "Separar orçamento, realizado e forecast para evitar decisões por saldo bancário.",
+    "Acompanhar capital de giro, prazo médio de recebimento e prazo médio de pagamento em conjunto."
+  ]
+}

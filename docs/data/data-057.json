@@ -1,0 +1,51 @@
+{
+  "total_overdue": 84300.0,
+  "customers": 12,
+  "items": [
+    {
+      "customer": "Varejão Popular",
+      "amount": 28600.0,
+      "days_overdue": 10,
+      "open_titles": 2,
+      "last_contact": "03/08/2026",
+      "risk": "Médio",
+      "recommended_action": "Contato comercial + proposta de regularização"
+    },
+    {
+      "customer": "Comercial Araguaia",
+      "amount": 24100.0,
+      "days_overdue": 17,
+      "open_titles": 3,
+      "last_contact": "01/08/2026",
+      "risk": "Alto",
+      "recommended_action": "Bloquear novo crédito e negociar parcelamento"
+    },
+    {
+      "customer": "Mercado Bom Preço",
+      "amount": 13750.0,
+      "days_overdue": 28,
+      "open_titles": 1,
+      "last_contact": "30/07/2026",
+      "risk": "Alto",
+      "recommended_action": "Escalonar cobrança e revisar limite"
+    },
+    {
+      "customer": "Empório Avenida",
+      "amount": 9820.0,
+      "days_overdue": 7,
+      "open_titles": 2,
+      "last_contact": "04/08/2026",
+      "risk": "Baixo",
+      "recommended_action": "Lembrete de vencimento e retorno em 48h"
+    },
+    {
+      "customer": "Casa do Varejo",
+      "amount": 8030.0,
+      "days_overdue": 13,
+      "open_titles": 1,
+      "last_contact": "02/08/2026",
+      "risk": "Médio",
+      "recommended_action": "Contato financeiro e confirmação de pagamento"
+    }
+  ]
+}

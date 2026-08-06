@@ -1,0 +1,29 @@
+{
+  "kind": "do-not-buy",
+  "items": [
+    {
+      "product": "Granola Zero 250g",
+      "stock": 870,
+      "avg_daily_sales": 9,
+      "coverage_days": 96.7,
+      "suggested_qty": 0,
+      "reason": "Excesso de cobertura"
+    },
+    {
+      "product": "Tempero Gourmet 60g",
+      "stock": 610,
+      "avg_daily_sales": 8,
+      "coverage_days": 76.3,
+      "suggested_qty": 0,
+      "reason": "Giro baixo"
+    },
+    {
+      "product": "Chá Premium 20un",
+      "stock": 780,
+      "avg_daily_sales": 12,
+      "coverage_days": 65.0,
+      "suggested_qty": 0,
+      "reason": "Estoque acima do máximo"
+    }
+  ]
+}

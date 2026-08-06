@@ -1,0 +1,46 @@
+{
+  "ranking": "bottom",
+  "seller_id": "V003",
+  "items": [
+    {
+      "product_id": "P012",
+      "product": "Granola Zero 250g",
+      "quantity": 53,
+      "revenue": 1054.7,
+      "cost": 721.86,
+      "margin_pct": 31.6
+    },
+    {
+      "product_id": "P011",
+      "product": "Tempero Gourmet 60g",
+      "quantity": 75,
+      "revenue": 937.5,
+      "cost": 653.25,
+      "margin_pct": 30.3
+    },
+    {
+      "product_id": "P010",
+      "product": "Chá Premium 20un",
+      "quantity": 99,
+      "revenue": 1673.1,
+      "cost": 1064.25,
+      "margin_pct": 36.4
+    },
+    {
+      "product_id": "P009",
+      "product": "Molho Especial 320g",
+      "quantity": 163,
+      "revenue": 1939.7,
+      "cost": 1281.18,
+      "margin_pct": 33.9
+    },
+    {
+      "product_id": "P008",
+      "product": "Biscoito Integral 140g",
+      "quantity": 206,
+      "revenue": 1483.2,
+      "cost": 966.14,
+      "margin_pct": 34.9
+    }
+  ]
+}

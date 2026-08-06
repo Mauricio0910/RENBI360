@@ -1,0 +1,55 @@
+{
+  "items": [
+    {
+      "code": "ADM",
+      "name": "Administrativo",
+      "fixed": 51200.0,
+      "variable": 11400.0,
+      "budget": 65000.0,
+      "actual": 62600.0,
+      "variance": 2400.0,
+      "usage_pct": 96.3
+    },
+    {
+      "code": "COM",
+      "name": "Comercial",
+      "fixed": 43800.0,
+      "variable": 22900.0,
+      "budget": 70000.0,
+      "actual": 66700.0,
+      "variance": 3300.0,
+      "usage_pct": 95.3
+    },
+    {
+      "code": "LOG",
+      "name": "Logística",
+      "fixed": 36700.0,
+      "variable": 26400.0,
+      "budget": 68000.0,
+      "actual": 63100.0,
+      "variance": 4900.0,
+      "usage_pct": 92.8
+    },
+    {
+      "code": "OPS",
+      "name": "Operações",
+      "fixed": 58900.0,
+      "variable": 18200.0,
+      "budget": 80000.0,
+      "actual": 77100.0,
+      "variance": 2900.0,
+      "usage_pct": 96.4
+    },
+    {
+      "code": "MKT",
+      "name": "Marketing",
+      "fixed": 18100.0,
+      "variable": 9800.0,
+      "budget": 30000.0,
+      "actual": 27900.0,
+      "variance": 2100.0,
+      "usage_pct": 93.0
+    }
+  ],
+  "total": 297400.0
+}

@@ -1,0 +1,60 @@
+{
+  "method": "Preço 38% + Entrega 24% + Qualidade 24% + Condições 14%",
+  "items": [
+    {
+      "id": "F001",
+      "name": "Distribuidora Norte",
+      "price_index": 94,
+      "delivery": 97,
+      "quality": 96,
+      "terms": 88,
+      "spend": 258400.0,
+      "score": 94.4,
+      "classification": "A"
+    },
+    {
+      "id": "F002",
+      "name": "Atacado Brasil",
+      "price_index": 97,
+      "delivery": 91,
+      "quality": 92,
+      "terms": 94,
+      "spend": 221900.0,
+      "score": 93.9,
+      "classification": "A"
+    },
+    {
+      "id": "F003",
+      "name": "Central Alimentos",
+      "price_index": 91,
+      "delivery": 95,
+      "quality": 94,
+      "terms": 86,
+      "spend": 189700.0,
+      "score": 92.0,
+      "classification": "B"
+    },
+    {
+      "id": "F004",
+      "name": "Prime Supply",
+      "price_index": 89,
+      "delivery": 88,
+      "quality": 99,
+      "terms": 90,
+      "spend": 143820.0,
+      "score": 91.3,
+      "classification": "B"
+    },
+    {
+      "id": "F005",
+      "name": "Rota Distribuição",
+      "price_index": 92,
+      "delivery": 84,
+      "quality": 90,
+      "terms": 96,
+      "spend": 117300.0,
+      "score": 90.2,
+      "classification": "B"
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "version": 2,
+  "notes": "REN-BI v1.5: integração preferencial por VIEWS dbo.vw_renbi_*. Execute database/sqlserver/01_views_renbi_adapter.sql, mapeie apenas as VIEWS BASE nos pontos comentados e depois habilite as entidades abaixo. Nunca coloque senha neste arquivo.",
+  "entities": {
+    "management_daily": {
+      "label": "Indicadores gerenciais por dia",
+      "description": "Fluxos diários e saldos. Alimenta filtros Dia/Mês/Ano, Dashboard e Projeções.",
+      "enabled": false,
+      "max_rows": 5000,
+      "query": "SELECT TOP (5000) CONVERT(varchar(10), [date], 23) AS date, revenue, sales, purchases, gross_profit, expenses, net_profit, inventory, receivables, payables, cash FROM dbo.vw_renbi_management_daily ORDER BY [date] DESC"
+    },
+    "summary": {
+      "label": "Resumo executivo",
+      "description": "KPIs móveis do período mais recente.",
+      "enabled": false,
+      "max_rows": 1,
+      "query": "SELECT TOP (1) revenue, sales, purchases, gross_profit, expenses, net_profit, inventory, receivables, payables, cash FROM dbo.vw_renbi_summary"
+    },
+    "sales_daily": {
+      "label": "Vendas diárias",
+      "description": "Resultado diário de vendas, pedidos, ticket médio e meta.",
+      "enabled": false,
+      "max_rows": 1200,
+      "query": "SELECT TOP (1200) CONVERT(varchar(10), [date], 23) AS date, sales, target, orders, avg_ticket FROM dbo.vw_renbi_sales_daily ORDER BY [date] DESC"
+    },
+    "products": {
+      "label": "Produtos e desempenho",
+      "description": "Produtos mais/menos vendidos com quantidade, receita, custo e estoque.",
+      "enabled": false,
+      "max_rows": 20000,
+      "query": "SELECT TOP (20000) product_id, product, quantity, revenue, cost, stock FROM dbo.vw_renbi_product_sales ORDER BY revenue DESC"
+    },
+    "inventory": {
+      "label": "Estoque analítico",
+      "description": "Estoque, valor a custo, consumo médio, mínimo e máximo.",
+      "enabled": false,
+      "max_rows": 30000,
+      "query": "SELECT TOP (30000) product_id, product, stock, cost_value, avg_daily_sales, min_stock, max_stock FROM dbo.vw_renbi_inventory_analytics ORDER BY cost_value DESC"
+    },
+    "purchase_suggestions": {
+      "label": "Sugestões de compra e não compra",
+      "description": "Cobertura, quantidade sugerida e recomendação por produto.",
+      "enabled": false,
+      "max_rows": 30000,
+      "query": "SELECT TOP (30000) product_id, product, stock, avg_daily_sales, min_stock, max_stock, days_cover, suggested_quantity, recommendation FROM dbo.vw_renbi_purchase_suggestions ORDER BY CASE recommendation WHEN 'COMPRAR' THEN 1 WHEN 'MONITORAR' THEN 2 ELSE 3 END, days_cover"
+    },
+    "accounts_receivable": {
+      "label": "Contas a receber",
+      "description": "Títulos a receber, recebidos e vencidos.",
+      "enabled": false,
+      "max_rows": 30000,
+      "query": "SELECT TOP (30000) CONVERT(varchar(10), due_date, 23) AS due_date, counterparty, description, value, paid_value, status, title_id, customer_id, CONVERT(varchar(10), payment_date, 23) AS payment_date FROM dbo.vw_renbi_accounts_receivable ORDER BY due_date"
+    },
+    "accounts_payable": {
+      "label": "Contas a pagar",
+      "description": "Títulos a pagar, pagos e vencidos.",
+      "enabled": false,
+      "max_rows": 30000,
+      "query": "SELECT TOP (30000) CONVERT(varchar(10), due_date, 23) AS due_date, counterparty, description, value, paid_value, status, title_id, supplier_id, CONVERT(varchar(10), payment_date, 23) AS payment_date, cost_center_id, category FROM dbo.vw_renbi_accounts_payable ORDER BY due_date"
+    },
+    "debtors": {
+      "label": "Devedores",
+      "description": "Clientes em atraso com valor, títulos e dias de atraso.",
+      "enabled": false,
+      "max_rows": 10000,
+      "query": "SELECT TOP (10000) customer_id, customer, overdue_value, overdue_titles, max_days_overdue FROM dbo.vw_renbi_debtors WHERE overdue_value > 0 ORDER BY overdue_value DESC"
+    },
+    "suppliers": {
+      "label": "Desempenho de fornecedores",
+      "description": "Gasto, índice de preço, entrega, qualidade e condições.",
+      "enabled": false,
+      "max_rows": 10000,
+      "query": "SELECT TOP (10000) supplier_id, name, spend, price_index, delivery, quality, terms FROM dbo.vw_renbi_supplier_performance ORDER BY spend DESC"
+    },
+    "supplier_prices": {
+      "label": "Comparação de preços por fornecedor",
+      "description": "Melhor custo por produto e ranking de preço.",
+      "enabled": false,
+      "max_rows": 30000,
+      "query": "SELECT TOP (30000) product_id, product, supplier_id, supplier, CONVERT(varchar(10), last_purchase_date, 23) AS last_purchase_date, last_cost, best_cost, price_rank, payment_term_days, delivery_days, quality_score FROM dbo.vw_renbi_supplier_price_comparison ORDER BY product, price_rank"
+    },
+    "sellers": {
+      "label": "Vendedores e metas",
+      "description": "Meta x realizado por vendedor.",
+      "enabled": false,
+      "max_rows": 3000,
+      "query": "SELECT TOP (3000) seller_id, name, target, actual, team FROM dbo.vw_renbi_seller_performance ORDER BY actual DESC"
+    },
+    "seller_products": {
+      "label": "Produtos por vendedor",
+      "description": "Mais e menos vendidos por vendedor, receita, custo e margem.",
+      "enabled": false,
+      "max_rows": 50000,
+      "query": "SELECT TOP (50000) seller_id, seller, product_id, product, quantity, revenue, cost, gross_margin FROM dbo.vw_renbi_seller_product_sales ORDER BY seller, revenue DESC"
+    },
+    "expenses": {
+      "label": "Despesas",
+      "description": "Despesas por data, centro de custo, categoria e tipo.",
+      "enabled": false,
+      "max_rows": 50000,
+      "query": "SELECT TOP (50000) CONVERT(varchar(10), [date], 23) AS date, cost_center, category, description, value, fixed_variable, expense_id, cost_center_id FROM dbo.vw_renbi_expenses_analytics ORDER BY [date] DESC"
+    },
+    "accounting_entries": {
+      "label": "Lançamentos contábeis",
+      "description": "Base para DRE, DMPL e Balanço Patrimonial.",
+      "enabled": false,
+      "max_rows": 100000,
+      "query": "SELECT TOP (100000) CONVERT(varchar(10), entry_date, 23) AS date, account_code, account_name, statement_group, description, debit, credit, cost_center_id FROM dbo.vw_renbi_accounting_entries ORDER BY entry_date DESC"
+    }
+  }
+}

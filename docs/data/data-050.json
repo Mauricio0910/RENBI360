@@ -1,0 +1,31 @@
+{
+  "dimension": "supplier",
+  "metric": "growth",
+  "rows": [
+    {
+      "dimension": "Distribuidora Norte",
+      "value": 258400.0,
+      "secondary": 94
+    },
+    {
+      "dimension": "Atacado Brasil",
+      "value": 221900.0,
+      "secondary": 97
+    },
+    {
+      "dimension": "Central Alimentos",
+      "value": 189700.0,
+      "secondary": 91
+    },
+    {
+      "dimension": "Prime Supply",
+      "value": 143820.0,
+      "secondary": 89
+    },
+    {
+      "dimension": "Rota Distribuição",
+      "value": 117300.0,
+      "secondary": 92
+    }
+  ]
+}

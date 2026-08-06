@@ -1,0 +1,31 @@
+{
+  "dimension": "seller",
+  "metric": "revenue",
+  "rows": [
+    {
+      "dimension": "Ana Souza",
+      "value": 247500.0,
+      "secondary": 107.6
+    },
+    {
+      "dimension": "Carlos Lima",
+      "value": 193800.0,
+      "secondary": 92.3
+    },
+    {
+      "dimension": "Marina Alves",
+      "value": 221200.0,
+      "secondary": 110.6
+    },
+    {
+      "dimension": "Paulo Mendes",
+      "value": 176900.0,
+      "secondary": 93.1
+    },
+    {
+      "dimension": "Juliana Reis",
+      "value": 194000.0,
+      "secondary": 107.8
+    }
+  ]
+}

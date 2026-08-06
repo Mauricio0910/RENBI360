@@ -1,0 +1,55 @@
+{
+  "columns": [
+    "Capital Social",
+    "Reservas",
+    "Lucros Acumulados",
+    "Patrimônio Líquido"
+  ],
+  "rows": [
+    {
+      "event": "Saldo inicial",
+      "values": [
+        500000,
+        82500,
+        164300,
+        746800
+      ]
+    },
+    {
+      "event": "Lucro do período",
+      "values": [
+        0,
+        0,
+        145430,
+        145430
+      ]
+    },
+    {
+      "event": "Dividendos distribuídos",
+      "values": [
+        0,
+        0,
+        -58000,
+        -58000
+      ]
+    },
+    {
+      "event": "Reserva legal",
+      "values": [
+        0,
+        7272,
+        -7272,
+        0
+      ]
+    },
+    {
+      "event": "Saldo final",
+      "values": [
+        500000,
+        89772,
+        244458,
+        834230
+      ]
+    }
+  ]
+}

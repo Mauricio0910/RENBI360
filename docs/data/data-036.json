@@ -1,0 +1,46 @@
+{
+  "ranking": "top",
+  "seller_id": "V004",
+  "items": [
+    {
+      "product_id": "P001",
+      "product": "Arroz Premium 5kg",
+      "quantity": 3702,
+      "revenue": 106987.8,
+      "cost": 67931.7,
+      "margin_pct": 36.5
+    },
+    {
+      "product_id": "P002",
+      "product": "Feijão Carioca 1kg",
+      "quantity": 2809,
+      "revenue": 27500.11,
+      "cost": 17162.99,
+      "margin_pct": 37.6
+    },
+    {
+      "product_id": "P003",
+      "product": "Óleo de Soja 900ml",
+      "quantity": 2538,
+      "revenue": 19009.62,
+      "cost": 13400.64,
+      "margin_pct": 29.5
+    },
+    {
+      "product_id": "P004",
+      "product": "Café Tradicional 500g",
+      "quantity": 2289,
+      "revenue": 43262.1,
+      "cost": 29230.53,
+      "margin_pct": 32.4
+    },
+    {
+      "product_id": "P005",
+      "product": "Açúcar Cristal 2kg",
+      "quantity": 2001,
+      "revenue": 17188.59,
+      "cost": 11225.61,
+      "margin_pct": 34.7
+    }
+  ]
+}

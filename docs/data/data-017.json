@@ -1,0 +1,62 @@
+{
+  "ranking": "top",
+  "seller_id": null,
+  "items": [
+    {
+      "product_id": "P001",
+      "product": "Arroz Premium 5kg",
+      "quantity": 18420,
+      "revenue": 532338.0,
+      "cost": 338007.0,
+      "margin_pct": 36.5
+    },
+    {
+      "product_id": "P002",
+      "product": "Feijão Carioca 1kg",
+      "quantity": 13980,
+      "revenue": 136864.2,
+      "cost": 85417.8,
+      "margin_pct": 37.6
+    },
+    {
+      "product_id": "P003",
+      "product": "Óleo de Soja 900ml",
+      "quantity": 12630,
+      "revenue": 94598.7,
+      "cost": 66686.4,
+      "margin_pct": 29.5
+    },
+    {
+      "product_id": "P004",
+      "product": "Café Tradicional 500g",
+      "quantity": 11390,
+      "revenue": 215271.0,
+      "cost": 145450.3,
+      "margin_pct": 32.4
+    },
+    {
+      "product_id": "P005",
+      "product": "Açúcar Cristal 2kg",
+      "quantity": 9960,
+      "revenue": 85556.4,
+      "cost": 55875.6,
+      "margin_pct": 34.7
+    },
+    {
+      "product_id": "P006",
+      "product": "Macarrão Espaguete 500g",
+      "quantity": 9420,
+      "revenue": 49831.8,
+      "cost": 29202.0,
+      "margin_pct": 41.4
+    },
+    {
+      "product_id": "P007",
+      "product": "Leite Integral 1L",
+      "quantity": 9180,
+      "revenue": 58660.2,
+      "cost": 39657.6,
+      "margin_pct": 32.4
+    }
+  ]
+}

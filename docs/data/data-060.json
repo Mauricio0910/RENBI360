@@ -1,0 +1,116 @@
+{
+  "enabled": false,
+  "data_source": "demo",
+  "driver": "ODBC Driver 18 for SQL Server",
+  "server": "",
+  "port": "1433",
+  "database": "",
+  "username_configured": false,
+  "password_configured": false,
+  "encrypt": "yes",
+  "trust_server_certificate": "no",
+  "mapping_file": "sql_mapping.json",
+  "mapping_exists": false,
+  "snapshot_exists": false,
+  "ready": false,
+  "last_sync_at": null,
+  "configured_entities": 0,
+  "errors": [
+    "Modo demonstração: configure a API RenBI para receber dados reais do SQL Server."
+  ],
+  "security": {
+    "browser_direct_sql": false,
+    "read_only_recommended": true,
+    "credentials_exposed": false
+  },
+  "entities": [
+    {
+      "entity": "management_daily",
+      "label": "Indicadores gerenciais por dia",
+      "enabled": false,
+      "last_rows": 0,
+      "last_sync_at": null,
+      "description": "Base para filtros Dia/Mês/Ano em faturamento, vendas, compras, despesas, estoque e caixa."
+    },
+    {
+      "entity": "summary",
+      "label": "Resumo executivo",
+      "enabled": false,
+      "last_rows": 0,
+      "last_sync_at": null,
+      "description": "KPIs principais do Dashboard, DRE e projeções."
+    },
+    {
+      "entity": "sales_daily",
+      "label": "Vendas diárias",
+      "enabled": false,
+      "last_rows": 0,
+      "last_sync_at": null,
+      "description": "Vendas, pedidos, ticket e metas por dia."
+    },
+    {
+      "entity": "products",
+      "label": "Produtos e desempenho",
+      "enabled": false,
+      "last_rows": 0,
+      "last_sync_at": null,
+      "description": "Produtos mais e menos vendidos."
+    },
+    {
+      "entity": "inventory",
+      "label": "Estoque",
+      "enabled": false,
+      "last_rows": 0,
+      "last_sync_at": null,
+      "description": "Saldo, custo, cobertura e sugestão de compra."
+    },
+    {
+      "entity": "accounts_receivable",
+      "label": "Contas a receber",
+      "enabled": false,
+      "last_rows": 0,
+      "last_sync_at": null,
+      "description": "Recebíveis, vencidos e devedores."
+    },
+    {
+      "entity": "accounts_payable",
+      "label": "Contas a pagar",
+      "enabled": false,
+      "last_rows": 0,
+      "last_sync_at": null,
+      "description": "Obrigações e vencimentos."
+    },
+    {
+      "entity": "suppliers",
+      "label": "Fornecedores",
+      "enabled": false,
+      "last_rows": 0,
+      "last_sync_at": null,
+      "description": "Fornecedores, gastos e qualificação."
+    },
+    {
+      "entity": "sellers",
+      "label": "Vendedores e metas",
+      "enabled": false,
+      "last_rows": 0,
+      "last_sync_at": null,
+      "description": "Equipe, metas e realizado."
+    },
+    {
+      "entity": "expenses",
+      "label": "Despesas",
+      "enabled": false,
+      "last_rows": 0,
+      "last_sync_at": null,
+      "description": "Centro de custos e despesas fixas/variáveis."
+    },
+    {
+      "entity": "accounting_entries",
+      "label": "Lançamentos contábeis",
+      "enabled": false,
+      "last_rows": 0,
+      "last_sync_at": null,
+      "description": "Base para DRE, DMPL e Balanço."
+    }
+  ]
+}

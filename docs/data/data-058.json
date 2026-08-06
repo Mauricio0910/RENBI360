@@ -1,0 +1,125 @@
+{
+  "today": {
+    "date": "04/08/2026",
+    "sales": 61250.0,
+    "target": 50000.0,
+    "orders": 347,
+    "avg_ticket": 176.51,
+    "achievement_pct": 122.5
+  },
+  "items": [
+    {
+      "date": "22/07/2026",
+      "sales": 36500.0,
+      "target": 50000.0,
+      "orders": 207,
+      "avg_ticket": 176.33,
+      "achievement_pct": 73.0
+    },
+    {
+      "date": "23/07/2026",
+      "sales": 42100.0,
+      "target": 50000.0,
+      "orders": 239,
+      "avg_ticket": 176.15,
+      "achievement_pct": 84.2
+    },
+    {
+      "date": "24/07/2026",
+      "sales": 39800.0,
+      "target": 50000.0,
+      "orders": 225,
+      "avg_ticket": 176.89,
+      "achievement_pct": 79.6
+    },
+    {
+      "date": "25/07/2026",
+      "sales": 47500.0,
+      "target": 35000.0,
+      "orders": 269,
+      "avg_ticket": 176.58,
+      "achievement_pct": 135.7
+    },
+    {
+      "date": "26/07/2026",
+      "sales": 51200.0,
+      "target": 35000.0,
+      "orders": 290,
+      "avg_ticket": 176.55,
+      "achievement_pct": 146.3
+    },
+    {
+      "date": "27/07/2026",
+      "sales": 33800.0,
+      "target": 50000.0,
+      "orders": 192,
+      "avg_ticket": 176.04,
+      "achievement_pct": 67.6
+    },
+    {
+      "date": "28/07/2026",
+      "sales": 29600.0,
+      "target": 50000.0,
+      "orders": 168,
+      "avg_ticket": 176.19,
+      "achievement_pct": 59.2
+    },
+    {
+      "date": "29/07/2026",
+      "sales": 45500.0,
+      "target": 50000.0,
+      "orders": 258,
+      "avg_ticket": 176.36,
+      "achievement_pct": 91.0
+    },
+    {
+      "date": "30/07/2026",
+      "sales": 48900.0,
+      "target": 50000.0,
+      "orders": 277,
+      "avg_ticket": 176.53,
+      "achievement_pct": 97.8
+    },
+    {
+      "date": "31/07/2026",
+      "sales": 52700.0,
+      "target": 50000.0,
+      "orders": 299,
+      "avg_ticket": 176.25,
+      "achievement_pct": 105.4
+    },
+    {
+      "date": "01/08/2026",
+      "sales": 50100.0,
+      "target": 35000.0,
+      "orders": 284,
+      "avg_ticket": 176.41,
+      "achievement_pct": 143.1
+    },
+    {
+      "date": "02/08/2026",
+      "sales": 44800.0,
+      "target": 35000.0,
+      "orders": 254,
+      "avg_ticket": 176.38,
+      "achievement_pct": 128.0
+    },
+    {
+      "date": "03/08/2026",
+      "sales": 56300.0,
+      "target": 50000.0,
+      "orders": 319,
+      "avg_ticket": 176.49,
+      "achievement_pct": 112.6
+    },
+    {
+      "date": "04/08/2026",
+      "sales": 61250.0,
+      "target": 50000.0,
+      "orders": 347,
+      "avg_ticket": 176.51,
+      "achievement_pct": 122.5
+    }
+  ],
+  "average_daily_sales": 45717.86
+}

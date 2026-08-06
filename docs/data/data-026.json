@@ -1,0 +1,61 @@
+{
+  "team_target": 1010000.0,
+  "team_actual": 1033400.0,
+  "sellers": [
+    {
+      "id": "V001",
+      "name": "Ana Souza",
+      "target": 230000.0,
+      "actual": 247500.0,
+      "remaining": 0,
+      "achievement_pct": 107.6,
+      "forecast": 267300.0,
+      "avg_ticket": 155.7,
+      "conversion_pct": 29.2
+    },
+    {
+      "id": "V002",
+      "name": "Carlos Lima",
+      "target": 210000.0,
+      "actual": 193800.0,
+      "remaining": 16200.0,
+      "achievement_pct": 92.3,
+      "forecast": 209304.0,
+      "avg_ticket": 165.4,
+      "conversion_pct": 31.0
+    },
+    {
+      "id": "V003",
+      "name": "Marina Alves",
+      "target": 200000.0,
+      "actual": 221200.0,
+      "remaining": 0,
+      "achievement_pct": 110.6,
+      "forecast": 238896.0,
+      "avg_ticket": 175.1,
+      "conversion_pct": 32.8
+    },
+    {
+      "id": "V004",
+      "name": "Paulo Mendes",
+      "target": 190000.0,
+      "actual": 176900.0,
+      "remaining": 13100.0,
+      "achievement_pct": 93.1,
+      "forecast": 191052.0,
+      "avg_ticket": 184.8,
+      "conversion_pct": 34.6
+    },
+    {
+      "id": "V005",
+      "name": "Juliana Reis",
+      "target": 180000.0,
+      "actual": 194000.0,
+      "remaining": 0,
+      "achievement_pct": 107.8,
+      "forecast": 209520.0,
+      "avg_ticket": 194.5,
+      "conversion_pct": 36.4
+    }
+  ]
+}

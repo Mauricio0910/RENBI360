@@ -1,0 +1,85 @@
+{
+  "period": "30d",
+  "kpis": {
+    "revenue": 1284900.0,
+    "sales": 1117400.0,
+    "purchases": 653820.0,
+    "gross_margin_pct": 33.6,
+    "net_profit": 145430.0,
+    "net_margin_pct": 11.3,
+    "inventory_value": 914300.0,
+    "cash": 522800.0,
+    "expenses": 286450.0,
+    "sales_growth_pct": 8.7,
+    "expense_growth_pct": 3.1,
+    "stock_turnover": 5.4,
+    "coverage_days": 37
+  },
+  "revenue_history": [
+    {
+      "month": "2025-09",
+      "value": 897300.67
+    },
+    {
+      "month": "2025-10",
+      "value": 912914.6
+    },
+    {
+      "month": "2025-11",
+      "value": 979371.09
+    },
+    {
+      "month": "2025-12",
+      "value": 1014429.64
+    },
+    {
+      "month": "2026-01",
+      "value": 978709.09
+    },
+    {
+      "month": "2026-02",
+      "value": 970846.12
+    },
+    {
+      "month": "2026-03",
+      "value": 996669.66
+    },
+    {
+      "month": "2026-04",
+      "value": 1058817.89
+    },
+    {
+      "month": "2026-05",
+      "value": 1067503.37
+    },
+    {
+      "month": "2026-06",
+      "value": 1086079.0
+    },
+    {
+      "month": "2026-07",
+      "value": 1114967.61
+    },
+    {
+      "month": "2026-08",
+      "value": 1154880.11
+    }
+  ],
+  "alerts": [
+    {
+      "severity": "warning",
+      "title": "Estoque acima do ideal",
+      "message": "18 itens têm cobertura superior a 90 dias."
+    },
+    {
+      "severity": "success",
+      "title": "Meta comercial",
+      "message": "Equipe está em 103,4% da meta consolidada."
+    },
+    {
+      "severity": "info",
+      "title": "Oportunidade de compra",
+      "message": "23 itens têm risco de ruptura em até 12 dias."
+    }
+  ]
+}

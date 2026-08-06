@@ -1,0 +1,77 @@
+{
+  "period": "30d",
+  "total_sales": 1117400.0,
+  "orders": 6320,
+  "avg_ticket": 176.81,
+  "customers": 4280,
+  "return_rate_pct": 1.7,
+  "discount_pct": 2.9,
+  "channels": [
+    {
+      "name": "Loja física",
+      "value": 793354.0
+    },
+    {
+      "name": "E-commerce",
+      "value": 189958.0
+    },
+    {
+      "name": "Televendas",
+      "value": 89392.0
+    },
+    {
+      "name": "Marketplace",
+      "value": 44696.0
+    }
+  ],
+  "history": [
+    {
+      "month": "2025-09",
+      "value": 775556.7
+    },
+    {
+      "month": "2025-10",
+      "value": 788280.1
+    },
+    {
+      "month": "2025-11",
+      "value": 844836.24
+    },
+    {
+      "month": "2025-12",
+      "value": 874222.61
+    },
+    {
+      "month": "2026-01",
+      "value": 842613.81
+    },
+    {
+      "month": "2026-02",
+      "value": 835026.38
+    },
+    {
+      "month": "2026-03",
+      "value": 856398.46
+    },
+    {
+      "month": "2026-04",
+      "value": 908909.74
+    },
+    {
+      "month": "2026-05",
+      "value": 915468.89
+    },
+    {
+      "month": "2026-06",
+      "value": 930487.61
+    },
+    {
+      "month": "2026-07",
+      "value": 954302.98
+    },
+    {
+      "month": "2026-08",
+      "value": 987496.98
+    }
+  ]
+}

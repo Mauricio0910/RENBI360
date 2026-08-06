@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0e2442" />
+  <title>RenBI 360 — Inteligência Gerencial e Projeções</title>
+  <link rel="stylesheet" href="./assets/app.css" />
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.4/dist/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+  <div id="loginScreen" class="auth-screen">
+    <div class="auth-card">
+      <div class="auth-brand"><img class="brand-logo-auth" src="./assets/logo-renbi360.svg" alt="RenBI 360" /></div>
+      <p class="eyebrow">ACESSO SEGURO</p>
+      <h1>Entrar na aplicação</h1>
+      <p class="auth-help">Use seu usuário e senha. Em produção, a autenticação deve ser validada pela API.</p>
+      <form id="loginForm">
+        <label>Usuário<input id="loginUser" autocomplete="username" required /></label>
+        <label>Senha<input id="loginPassword" type="password" autocomplete="current-password" required /></label>
+        <button class="primary auth-submit" type="submit">Entrar</button>
+      </form>
+      <div id="loginError" class="form-error"></div>
+      <div id="demoCredentials" class="demo-credentials"></div>
+    </div>
+  </div>
+
+  <div id="blockedScreen" class="auth-screen blocked-screen hidden">
+    <div class="auth-card block-card">
+      <div class="block-icon">!</div>
+      <p class="eyebrow">LICENÇA / FATURAMENTO</p>
+      <h1>Acesso temporariamente bloqueado</h1>
+      <p id="blockedMessage" class="auth-help">A licença desta empresa está bloqueada.</p>
+      <div id="blockedDetails" class="block-details"></div>
+      <div class="form-row block-actions">
+        <button id="blockedLogout" class="secondary">Sair</button>
+        <button id="demoUnblock" class="primary hidden">Liberar na demonstração</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="loadingOverlay" class="loading-overlay hidden"><div class="spinner"></div><strong id="loadingText">Preparando...</strong></div>
+
+  <div id="appShell" class="app-shell hidden">
+    <aside class="sidebar">
+      <div class="brand">
+        <img class="brand-logo" src="./assets/logo-renbi360.svg" alt="RenBI 360" />
+      </div>
+      <nav id="nav">
+        <button class="nav-item active" data-page="overview">Visão Geral</button>
+        <button class="nav-item" data-page="sales">Vendas</button>
+        <button class="nav-item" data-page="projections">Projeções</button>
+        <button class="nav-item" data-page="inventory">Compras & Estoque</button>
+        <button class="nav-item" data-page="finance">Financeiro & Contábil</button>
+        <button class="nav-item" data-page="team">Equipe & Metas</button>
+        <button class="nav-item" data-page="suppliers">Fornecedores</button>
+        <button class="nav-item" data-page="analytics">Cruzamentos</button>
+        <button class="nav-item" data-page="market">Oportunidades</button>
+        <button class="nav-item" data-page="users">Usuários & Licença</button>
+        <button class="nav-item" data-page="integration">Integrações / SQL</button>
+      </nav>
+      <div class="side-note">
+        <small>Status da integração</small>
+        <div class="status-row"><span class="status-dot"></span><strong id="syncStatus">Conectado</strong></div>
+        <span id="syncDetail">Sincronização recente</span>
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div class="title-area">
+          <p class="eyebrow">PAINEL EXECUTIVO</p>
+          <h1 id="pageTitle">Visão Geral</h1>
+          <small id="filterSummary">Mês atual</small>
+        </div>
+        <div class="top-actions-wrap">
+          <div class="top-actions filter-actions">
+            <select id="granularitySelect" aria-label="Granularidade">
+              <option value="day">Dia</option>
+              <option value="month" selected>Mês</option>
+              <option value="year">Ano</option>
+            </select>
+            <input id="referenceInput" type="month" aria-label="Referência" />
+            <button class="secondary" id="applyFilterBtn">Aplicar</button>
+            <button class="secondary" id="refreshBtn">Atualizar</button>
+          </div>
+          <div class="top-actions export-actions">
+            <select id="exportScope" aria-label="Escopo da exportação"><option value="current">Módulo atual</option><option value="all">Todos os relatórios</option></select>
+            <select id="exportFormat" aria-label="Formato"><option value="xlsx">Excel</option><option value="pdf">PDF</option></select>
+            <button class="primary" id="exportBtn">Exportar</button>
+            <button class="user-chip" id="userMenuBtn"><span id="userName">Usuário</span><small id="userRole">Perfil</small></button>
+            <button class="secondary" id="logoutBtn">Sair</button>
+          </div>
+        </div>
+      </header>
+      <section id="content" class="content"></section>
+    </main>
+  </div>
+  <script src="./config.js"></script>
+  <script src="./data-manifest.js"></script>
+  <script src="./assets/app.js"></script>
+</body>
+</html>

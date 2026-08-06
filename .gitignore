@@ -1,0 +1,9 @@
+.env
+*.env
+backend/.env
+backend/sql_mapping.json
+backend/data/sql_snapshot.json
+backend/data/*.db
+__pycache__/
+*.pyc
+.DS_Store

@@ -1,0 +1,51 @@
+{
+  "methodology": "Score demonstrativo: potencial 35%, crescimento 25%, competição 20%, aderência logística 20%.",
+  "items": [
+    {
+      "region": "Norte",
+      "state": "PA",
+      "city": "Marabá",
+      "score": 91,
+      "potential": 1850000,
+      "competition": "Média",
+      "trend": 12.4
+    },
+    {
+      "region": "Norte",
+      "state": "TO",
+      "city": "Gurupi",
+      "score": 88,
+      "potential": 1120000,
+      "competition": "Baixa",
+      "trend": 10.8
+    },
+    {
+      "region": "Nordeste",
+      "state": "MA",
+      "city": "Imperatriz",
+      "score": 87,
+      "potential": 1690000,
+      "competition": "Média",
+      "trend": 9.9
+    },
+    {
+      "region": "Centro-Oeste",
+      "state": "GO",
+      "city": "Rio Verde",
+      "score": 85,
+      "potential": 2100000,
+      "competition": "Alta",
+      "trend": 8.7
+    },
+    {
+      "region": "Nordeste",
+      "state": "PI",
+      "city": "Teresina",
+      "score": 82,
+      "potential": 2410000,
+      "competition": "Alta",
+      "trend": 7.6
+    }
+  ],
+  "note": "Para produção, conectar fontes públicas/licenciadas (IBGE, Receita, dados setoriais e dados internos) e registrar data/fonte de cada indicador."
+}

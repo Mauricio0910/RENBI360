@@ -1,0 +1,37 @@
+{
+  "kind": "buy",
+  "items": [
+    {
+      "product": "Arroz Premium 5kg",
+      "stock": 210,
+      "avg_daily_sales": 72,
+      "coverage_days": 2.9,
+      "suggested_qty": 1800,
+      "reason": "Ruptura iminente"
+    },
+    {
+      "product": "Óleo de Soja 900ml",
+      "stock": 360,
+      "avg_daily_sales": 61,
+      "coverage_days": 5.9,
+      "suggested_qty": 1200,
+      "reason": "Cobertura abaixo do mínimo"
+    },
+    {
+      "product": "Café Tradicional 500g",
+      "stock": 290,
+      "avg_daily_sales": 44,
+      "coverage_days": 6.6,
+      "suggested_qty": 900,
+      "reason": "Demanda crescente"
+    },
+    {
+      "product": "Leite Integral 1L",
+      "stock": 410,
+      "avg_daily_sales": 52,
+      "coverage_days": 7.9,
+      "suggested_qty": 1000,
+      "reason": "Lead time elevado"
+    }
+  ]
+}

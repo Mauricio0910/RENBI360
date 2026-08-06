@@ -1,0 +1,46 @@
+{
+  "dimension": "product",
+  "metric": "cost",
+  "rows": [
+    {
+      "dimension": "Arroz Premium 5kg",
+      "value": 532338.0,
+      "secondary": 36.5
+    },
+    {
+      "dimension": "Feijão Carioca 1kg",
+      "value": 136864.19999999998,
+      "secondary": 37.6
+    },
+    {
+      "dimension": "Óleo de Soja 900ml",
+      "value": 94598.7,
+      "secondary": 29.5
+    },
+    {
+      "dimension": "Café Tradicional 500g",
+      "value": 215270.99999999997,
+      "secondary": 32.4
+    },
+    {
+      "dimension": "Açúcar Cristal 2kg",
+      "value": 85556.4,
+      "secondary": 34.7
+    },
+    {
+      "dimension": "Macarrão Espaguete 500g",
+      "value": 49831.8,
+      "secondary": 41.4
+    },
+    {
+      "dimension": "Leite Integral 1L",
+      "value": 58660.2,
+      "secondary": 32.4
+    },
+    {
+      "dimension": "Biscoito Integral 140g",
+      "value": 8064.0,
+      "secondary": 34.9
+    }
+  ]
+}
