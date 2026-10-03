@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#0e2442" />
-  <title>RenBI 360 — Inteligência Gerencial e Projeções</title>
-  <link rel="stylesheet" href="./assets/app.css?v=232" />
+  <title>REN-BI 360 — Inteligência Gerencial</title>
+  <link rel="stylesheet" href="./assets/app.css?v=300" />
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.4/dist/jspdf.plugin.autotable.min.js"></script>
@@ -16,8 +16,9 @@
       <div class="auth-brand"><img class="brand-logo-auth" src="./assets/logo-renbi360.svg" alt="RenBI 360" /></div>
       <p class="eyebrow">ACESSO SEGURO</p>
       <h1>Entrar na aplicação</h1>
-      <p class="auth-help">Use seu usuário e senha. Em produção, a autenticação deve ser validada pela API.</p>
+      <p class="auth-help">Informe o código da empresa, usuário e senha.</p>
       <form id="loginForm">
+        <label>Código da empresa<input id="loginCompany" autocomplete="organization" required placeholder="Ex.: CLIENTE01" /></label>
         <label>Usuário<input id="loginUser" autocomplete="username" required /></label>
         <label>Senha<input id="loginPassword" type="password" autocomplete="current-password" required /></label>
         <button class="primary auth-submit" type="submit">Entrar</button>
@@ -100,6 +101,6 @@
   </div>
   <script src="./config.js"></script>
   <script src="./data-manifest.js"></script>
-  <script src="./assets/app.js?v=232"></script>
+  <script src="./assets/app.js?v=300"></script>
 </body>
 </html>

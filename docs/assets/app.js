@@ -1,5 +1,7 @@
-const API_BASE = (window.RENBI_API_BASE || '').replace(/\/$/, '');
-const API = API_BASE ? `${API_BASE}/api/v1` : '';
+let API_BASE = (window.RENBI_API_BASE || '').replace(/\/$/, '');
+let API = API_BASE ? `${API_BASE}/api/v1` : '';
+let activeTenant = null;
+const TENANT_REGISTRY = window.RENBI_TENANT_REGISTRY || './tenants.json';
 const DEMO_MAP = window.RENBI_DEMO_MAP || {};
 const content = document.getElementById('content');
 const title = document.getElementById('pageTitle');
@@ -48,6 +50,36 @@ function demoUsers(){initDemoState();return JSON.parse(localStorage.getItem(DEMO
 function saveDemoUsers(v){localStorage.setItem(DEMO_USERS_KEY,JSON.stringify(v))}
 function demoLicense(){initDemoState();return JSON.parse(localStorage.getItem(DEMO_LICENSE_KEY)||JSON.stringify(defaultLicense))}
 function saveDemoLicense(v){localStorage.setItem(DEMO_LICENSE_KEY,JSON.stringify(v))}
+
+function normalizeTenantCode(v){return String(v||'').trim().toUpperCase().replace(/[^A-Z0-9_-]/g,'')}
+async function loadTenantRegistry(){
+  const r=await fetch(`${TENANT_REGISTRY}${TENANT_REGISTRY.includes('?')?'&':'?'}v=${Date.now()}`,{cache:'no-store',headers:{'Accept':'application/json'}});
+  if(!r.ok) throw new Error('Cadastro de empresas indisponível.');
+  const data=await r.json();
+  return Array.isArray(data)?data:(data.clients||[]);
+}
+async function selectTenant(code){
+  const normalized=normalizeTenantCode(code);
+  if(!normalized) throw new Error('Informe o código da empresa.');
+  const clients=await loadTenantRegistry();
+  const tenant=clients.find(x=>normalizeTenantCode(x.code)===normalized && x.active!==false);
+  if(!tenant) throw new Error('Empresa não localizada ou inativa.');
+  const base=String(tenant.api_base||'').replace(/\/$/,'');
+  if(!/^https:\/\//i.test(base) && !/^http:\/\/127\.0\.0\.1(?::\d+)?$/i.test(base)) throw new Error('API da empresa está sem endereço válido.');
+  activeTenant=tenant;
+  API_BASE=base;
+  API=`${API_BASE}/api/v1`;
+  sessionStorage.setItem('renbi_tenant_code',normalized);
+  sessionStorage.setItem('renbi_tenant',JSON.stringify(tenant));
+  const lc=document.getElementById('loginCompany'); if(lc) lc.value=normalized;
+  const rc=document.getElementById('recoveryCompany'); if(rc) rc.value=normalized;
+  return tenant;
+}
+function clearTenantSession(){
+  sessionStorage.removeItem('renbi_tenant');
+  sessionStorage.removeItem('renbi_tenant_code');
+  activeTenant=null; API_BASE=''; API='';
+}
 
 function canonicalPath(path, remove=[]){
   const u=new URL(path,'https://renbi.local');
@@ -301,10 +333,11 @@ function installPasswordRecoveryUI(){
       <h2>Trocar minha senha</h2>
       <p class="auth-help">Informe seu usuário, a chave de recuperação do REN-BI e a nova senha.</p>
       <form id="recoveryForm">
+        <label>Código da empresa<input id="recoveryCompany" autocomplete="organization" required /></label>
         <label>Usuário<input id="recoveryUser" autocomplete="username" required /></label>
         <label>Chave de recuperação<input id="recoveryKey" type="password" autocomplete="off" required /></label>
-        <label>Nova senha<input id="recoveryPassword" type="password" autocomplete="new-password" minlength="6" required /></label>
-        <label>Confirmar nova senha<input id="recoveryPassword2" type="password" autocomplete="new-password" minlength="6" required /></label>
+        <label>Nova senha<input id="recoveryPassword" type="password" autocomplete="new-password" minlength="8" required /></label>
+        <label>Confirmar nova senha<input id="recoveryPassword2" type="password" autocomplete="new-password" minlength="8" required /></label>
         <button class="primary auth-submit" type="submit">Trocar senha</button>
         <button class="secondary auth-submit" id="backToLoginBtn" type="button">Voltar ao login</button>
       </form>
@@ -320,6 +353,7 @@ function installPasswordRecoveryUI(){
     if(loginError) loginError.classList.add('hidden');
     toggle.classList.add('hidden');
     panel.classList.remove('hidden');
+    document.getElementById('recoveryCompany').value=document.getElementById('loginCompany')?.value.trim()||sessionStorage.getItem('renbi_tenant_code')||'';
     document.getElementById('recoveryUser').value=document.getElementById('loginUser').value.trim();
     setTimeout(()=>document.getElementById('recoveryUser')?.focus(),50);
   }
@@ -341,10 +375,8 @@ function installPasswordRecoveryUI(){
     const msg=document.getElementById('recoveryMessage');
     msg.style.color='';
     msg.textContent='';
-    if(!API_BASE){
-      msg.textContent='Recuperação disponível apenas quando o portal está conectado à API REN-BI.';
-      return;
-    }
+    const company=document.getElementById('recoveryCompany').value.trim();
+    try{await selectTenant(company)}catch(ex){msg.textContent=ex.message;return;}
     const username=document.getElementById('recoveryUser').value.trim();
     const recovery_key=document.getElementById('recoveryKey').value;
     const new_password=document.getElementById('recoveryPassword').value;
@@ -353,8 +385,8 @@ function installPasswordRecoveryUI(){
       msg.textContent='As duas senhas não conferem.';
       return;
     }
-    if(new_password.length<6){
-      msg.textContent='A nova senha deve ter pelo menos 6 caracteres.';
+    if(new_password.length<8){
+      msg.textContent='A nova senha deve ter pelo menos 8 caracteres.';
       return;
     }
     try{
@@ -381,12 +413,24 @@ function installPasswordRecoveryUI(){
 }
 
 async function login(username,password){
- if(API_BASE){const r=await fetch(`${API}/auth/login`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username,password})});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.detail||'Usuário ou senha inválidos');authToken=d.access_token;currentUser={...(d.user||{}),role:d.user?.role||d.user?.roles?.[0]||'viewer'};sessionStorage.setItem('renbi_token',authToken);sessionStorage.setItem('renbi_user',JSON.stringify(currentUser));return;}
+ if(API_BASE){const r=await fetch(`${API}/auth/login`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username,password})});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.detail||'Usuário ou senha inválidos');authToken=d.access_token;currentUser={...(d.user||{}),role:d.user?.role||d.user?.roles?.[0]||'viewer'};sessionStorage.setItem('renbi_token',authToken);sessionStorage.setItem('renbi_user',JSON.stringify(currentUser));if(activeTenant?.code)localStorage.setItem('renbi_last_tenant',normalizeTenantCode(activeTenant.code));return;}
  const u=demoUsers().find(x=>x.username===username&&x.password===password);if(!u||!u.active)throw new Error('Usuário, senha ou status de acesso inválido.');currentUser={id:u.id,username:u.username,name:u.name,role:u.role};authToken='demo-session';sessionStorage.setItem('renbi_token',authToken);sessionStorage.setItem('renbi_user',JSON.stringify(currentUser));
 }
-async function startApp(){currentLicense=await getLicenseStatus();if(['blocked','suspended'].includes(currentLicense?.status)){showBlocked(currentLicense);return;}loginScreen.classList.add('hidden');blockedScreen.classList.add('hidden');appShell.classList.remove('hidden');document.getElementById('userName').textContent=currentUser?.name||currentUser?.username||'Usuário';document.getElementById('userRole').textContent=roleLabels[currentUser?.role]||currentUser?.role||'Perfil';applyPermissions();setReferenceInput();const s=await api(filteredPath('/integration/last-sync'));if(s){document.getElementById('syncStatus').textContent=s.status==='healthy'?'Conectado':'Atenção';document.getElementById('syncDetail').textContent=`Defasagem ${s.lag_seconds||0}s • atualização automática 60s`;}await go(allowedPages()[0]||'overview');startAutoRefresh();}
+async function startApp(){currentLicense=await getLicenseStatus();if(['blocked','suspended'].includes(currentLicense?.status)){showBlocked(currentLicense);return;}loginScreen.classList.add('hidden');blockedScreen.classList.add('hidden');appShell.classList.remove('hidden');document.getElementById('userName').textContent=currentUser?.name||currentUser?.username||'Usuário';document.getElementById('userRole').textContent=(activeTenant?.name?activeTenant.name+' • ':'')+(roleLabels[currentUser?.role]||currentUser?.role||'Perfil');applyPermissions();setReferenceInput();const s=await api(filteredPath('/integration/last-sync'));if(s){document.getElementById('syncStatus').textContent=s.status==='healthy'?'Conectado':'Atenção';document.getElementById('syncDetail').textContent=`Defasagem ${s.lag_seconds||0}s • atualização automática 60s`;}await go(allowedPages()[0]||'overview');startAutoRefresh();}
 function showBlocked(info){currentLicense=typeof info==='object'?info:{status:'blocked',reason:String(info)};appShell.classList.add('hidden');loginScreen.classList.add('hidden');blockedScreen.classList.remove('hidden');document.getElementById('blockedMessage').textContent=currentLicense.reason||'A licença está bloqueada por pendência financeira ou administrativa.';document.getElementById('blockedDetails').innerHTML=`<strong>Empresa:</strong> ${esc(currentLicense.company||'-')}<br><strong>Vencimento:</strong> ${esc(currentLicense.due_date||'-')}<br><strong>Carência:</strong> ${esc(currentLicense.grace_until||'-')}<br><strong>Contato:</strong> ${esc(currentLicense.billing_contact||'-')}`;const b=document.getElementById('demoUnblock');b.classList.toggle('hidden',!!API_BASE||currentUser?.role!=='superadmin');b.onclick=async()=>{const v=demoLicense();v.status='active';v.reason='';saveDemoLicense(v);currentLicense=v;await startApp();};}
 function logout(){stopAutoRefresh();sessionStorage.removeItem('renbi_token');sessionStorage.removeItem('renbi_user');authToken='';currentUser=null;appShell.classList.add('hidden');blockedScreen.classList.add('hidden');loginScreen.classList.remove('hidden');document.getElementById('loginPassword').value='';}
-document.getElementById('loginForm').onsubmit=async e=>{e.preventDefault();const err=document.getElementById('loginError');err.textContent='';try{await login(document.getElementById('loginUser').value.trim(),document.getElementById('loginPassword').value);await startApp()}catch(ex){err.textContent=ex.message}};
+document.getElementById('loginForm').onsubmit=async e=>{e.preventDefault();const err=document.getElementById('loginError');err.textContent='';try{const code=document.getElementById('loginCompany').value.trim();const previous=sessionStorage.getItem('renbi_tenant_code');if(previous&&normalizeTenantCode(previous)!==normalizeTenantCode(code)){sessionStorage.removeItem('renbi_token');sessionStorage.removeItem('renbi_user');authToken='';currentUser=null;}await selectTenant(code);await login(document.getElementById('loginUser').value.trim(),document.getElementById('loginPassword').value);await startApp()}catch(ex){err.textContent=ex.message}};
 
-(async function boot(){initDemoState();installPasswordRecoveryUI();document.getElementById('demoCredentials').innerHTML=API_BASE?'Autenticação conectada ao servidor RenBI.':'<strong>Modo demonstração:</strong><br>admin / RenBI@2026<br>gestor / Gestor@2026<br>financeiro / Finance@2026<br><small>Estas credenciais são públicas e servem somente para demonstração no GitHub Pages.</small>';const saved=sessionStorage.getItem('renbi_user');if(saved&&authToken){try{currentUser=JSON.parse(saved);await startApp();return}catch(e){logout()}}loginScreen.classList.remove('hidden');})();
+(async function boot(){
+  initDemoState();
+  installPasswordRecoveryUI();
+  document.getElementById('demoCredentials').innerHTML='<small>O código da empresa é fornecido pela Rensoftware na implantação.</small>';
+  const savedTenant=sessionStorage.getItem('renbi_tenant_code')||localStorage.getItem('renbi_last_tenant')||'';
+  if(savedTenant){
+    const lc=document.getElementById('loginCompany'); if(lc) lc.value=savedTenant;
+    try{await selectTenant(savedTenant);localStorage.setItem('renbi_last_tenant',savedTenant)}catch(e){clearTenantSession()}
+  }
+  const saved=sessionStorage.getItem('renbi_user');
+  if(saved&&authToken&&API_BASE){try{currentUser=JSON.parse(saved);await startApp();return}catch(e){logout()}}
+  loginScreen.classList.remove('hidden');
+})();

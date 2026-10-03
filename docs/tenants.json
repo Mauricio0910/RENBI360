@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "clients": [
+    {
+      "code": "PILOTO",
+      "name": "Ambiente Atual REN-BI",
+      "cnpj": "",
+      "api_base": "https://intellectual-paying-questionnaire-medicine.trycloudflare.com",
+      "active": true
+    }
+  ]
+}

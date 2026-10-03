@@ -393,3 +393,8 @@ tr:hover td{background:#fbfdff}
     padding:8px !important;
   }
 }
+
+
+/* REN-BI 360 v3.0 - portal multiempresa */
+#loginCompany,#recoveryCompany{text-transform:uppercase;letter-spacing:.04em}
+.auth-card{max-width:450px}
