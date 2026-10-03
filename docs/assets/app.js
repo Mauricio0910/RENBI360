@@ -278,6 +278,89 @@ function startAutoRefresh(){
   autoRefreshTimer=setInterval(refreshCurrentPageAutomatically,AUTO_REFRESH_MS);
 }
 
+
+function installPasswordRecoveryUI(){
+  const loginForm=document.getElementById('loginForm');
+  if(!loginForm || document.getElementById('recoveryToggleBtn')) return;
+
+  const toggle=document.createElement('button');
+  toggle.type='button';
+  toggle.id='recoveryToggleBtn';
+  toggle.className='secondary auth-submit';
+  toggle.style.marginTop='10px';
+  toggle.textContent='Esqueci minha senha';
+
+  const panel=document.createElement('div');
+  panel.id='passwordRecoveryPanel';
+  panel.className='hidden';
+  panel.style.marginTop='14px';
+  panel.innerHTML=`
+    <div style="border-top:1px solid rgba(127,127,127,.25);padding-top:14px">
+      <p class="eyebrow">RECUPERAÇÃO DE SENHA</p>
+      <p class="auth-help">Informe o usuário, a chave de recuperação do REN-BI e a nova senha.</p>
+      <form id="recoveryForm">
+        <label>Usuário<input id="recoveryUser" autocomplete="username" required /></label>
+        <label>Chave de recuperação<input id="recoveryKey" type="password" autocomplete="off" required /></label>
+        <label>Nova senha<input id="recoveryPassword" type="password" autocomplete="new-password" minlength="6" required /></label>
+        <label>Confirmar nova senha<input id="recoveryPassword2" type="password" autocomplete="new-password" minlength="6" required /></label>
+        <button class="primary auth-submit" type="submit">Trocar senha</button>
+      </form>
+      <div id="recoveryMessage" class="form-error"></div>
+    </div>`;
+
+  loginForm.insertAdjacentElement('afterend', toggle);
+  toggle.insertAdjacentElement('afterend', panel);
+
+  toggle.onclick=()=>{
+    panel.classList.toggle('hidden');
+    if(!panel.classList.contains('hidden')){
+      document.getElementById('recoveryUser').value=document.getElementById('loginUser').value.trim();
+    }
+  };
+
+  document.getElementById('recoveryForm').onsubmit=async e=>{
+    e.preventDefault();
+    const msg=document.getElementById('recoveryMessage');
+    msg.style.color='';
+    msg.textContent='';
+    if(!API_BASE){
+      msg.textContent='Recuperação disponível apenas quando o portal está conectado à API REN-BI.';
+      return;
+    }
+    const username=document.getElementById('recoveryUser').value.trim();
+    const recovery_key=document.getElementById('recoveryKey').value;
+    const new_password=document.getElementById('recoveryPassword').value;
+    const confirm=document.getElementById('recoveryPassword2').value;
+    if(new_password!==confirm){
+      msg.textContent='As duas senhas não conferem.';
+      return;
+    }
+    if(new_password.length<6){
+      msg.textContent='A nova senha deve ter pelo menos 6 caracteres.';
+      return;
+    }
+    try{
+      const r=await fetch(`${API}/auth/recover-password`,{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        cache:'no-store',
+        body:JSON.stringify({username,recovery_key,new_password})
+      });
+      const data=await r.json().catch(()=>({}));
+      if(!r.ok) throw new Error(data.detail||`HTTP ${r.status}`);
+      document.getElementById('loginUser').value=username;
+      document.getElementById('loginPassword').value='';
+      document.getElementById('recoveryKey').value='';
+      document.getElementById('recoveryPassword').value='';
+      document.getElementById('recoveryPassword2').value='';
+      msg.style.color='#0a7a3d';
+      msg.textContent='Senha alterada. Agora entre com a nova senha.';
+    }catch(ex){
+      msg.textContent=ex.message||'Não foi possível trocar a senha.';
+    }
+  };
+}
+
 async function login(username,password){
  if(API_BASE){const r=await fetch(`${API}/auth/login`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username,password})});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.detail||'Usuário ou senha inválidos');authToken=d.access_token;currentUser={...(d.user||{}),role:d.user?.role||d.user?.roles?.[0]||'viewer'};sessionStorage.setItem('renbi_token',authToken);sessionStorage.setItem('renbi_user',JSON.stringify(currentUser));return;}
  const u=demoUsers().find(x=>x.username===username&&x.password===password);if(!u||!u.active)throw new Error('Usuário, senha ou status de acesso inválido.');currentUser={id:u.id,username:u.username,name:u.name,role:u.role};authToken='demo-session';sessionStorage.setItem('renbi_token',authToken);sessionStorage.setItem('renbi_user',JSON.stringify(currentUser));
@@ -287,4 +370,4 @@ function showBlocked(info){currentLicense=typeof info==='object'?info:{status:'b
 function logout(){stopAutoRefresh();sessionStorage.removeItem('renbi_token');sessionStorage.removeItem('renbi_user');authToken='';currentUser=null;appShell.classList.add('hidden');blockedScreen.classList.add('hidden');loginScreen.classList.remove('hidden');document.getElementById('loginPassword').value='';}
 document.getElementById('loginForm').onsubmit=async e=>{e.preventDefault();const err=document.getElementById('loginError');err.textContent='';try{await login(document.getElementById('loginUser').value.trim(),document.getElementById('loginPassword').value);await startApp()}catch(ex){err.textContent=ex.message}};
 
-(async function boot(){initDemoState();document.getElementById('demoCredentials').innerHTML=API_BASE?'Autenticação conectada ao servidor RenBI.':'<strong>Modo demonstração:</strong><br>admin / RenBI@2026<br>gestor / Gestor@2026<br>financeiro / Finance@2026<br><small>Estas credenciais são públicas e servem somente para demonstração no GitHub Pages.</small>';const saved=sessionStorage.getItem('renbi_user');if(saved&&authToken){try{currentUser=JSON.parse(saved);await startApp();return}catch(e){logout()}}loginScreen.classList.remove('hidden');})();
+(async function boot(){initDemoState();installPasswordRecoveryUI();document.getElementById('demoCredentials').innerHTML=API_BASE?'Autenticação conectada ao servidor RenBI.':'<strong>Modo demonstração:</strong><br>admin / RenBI@2026<br>gestor / Gestor@2026<br>financeiro / Finance@2026<br><small>Estas credenciais são públicas e servem somente para demonstração no GitHub Pages.</small>';const saved=sessionStorage.getItem('renbi_user');if(saved&&authToken){try{currentUser=JSON.parse(saved);await startApp();return}catch(e){logout()}}loginScreen.classList.remove('hidden');})();
