@@ -1,8 +1,8 @@
 /*
  * REN-BI 360 - API publica temporaria via Cloudflare Quick Tunnel
- * ATENCAO: esta URL muda quando o Quick Tunnel for reiniciado.
+ * Esta URL muda quando o Quick Tunnel for reiniciado.
  */
-window.RENBI_PUBLIC_API_BASE = "https://finish-reel-generations-unlimited.trycloudflare.com";
+window.RENBI_PUBLIC_API_BASE = "https://intellectual-paying-questionnaire-medicine.trycloudflare.com";
 
 (function () {
   const isHttp = /^https?:$/.test(window.location.protocol);
