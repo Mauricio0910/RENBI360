@@ -193,3 +193,203 @@ tr:hover td{background:#fbfdff}
   .nav-item{flex:0 0 auto;min-height:auto}
   .topbar{display:block}
 }
+
+/* ============================================================
+   REN-BI 360 v2.3.1 - Login/recuperacao responsivos
+   Permite usar a recuperacao em telas menores sem reduzir o zoom.
+   ============================================================ */
+.auth-screen{
+  overflow-y:auto;
+  overflow-x:hidden;
+  align-items:start;
+  justify-items:center;
+  padding:18px;
+}
+
+.auth-card{
+  width:min(430px,100%);
+  max-height:none;
+  margin:auto 0;
+}
+
+#passwordRecoveryPanel{
+  width:100%;
+}
+
+#passwordRecoveryPanel form{
+  margin-top:12px;
+  gap:10px;
+}
+
+#passwordRecoveryPanel label{
+  gap:5px;
+}
+
+#passwordRecoveryPanel input{
+  padding:10px 11px;
+}
+
+#passwordRecoveryPanel .auth-submit{
+  margin-top:2px;
+}
+
+@media (max-height:850px){
+  .auth-screen{
+    padding:10px 14px;
+  }
+  .auth-card{
+    padding:20px 24px;
+    border-radius:16px;
+    margin:0;
+  }
+  .auth-brand{
+    margin-bottom:14px;
+  }
+  .auth-card h1{
+    font-size:22px;
+    margin:2px 0 5px;
+  }
+  .auth-help{
+    margin:6px 0;
+    line-height:1.35;
+  }
+  .auth-card form{
+    gap:9px;
+    margin-top:12px;
+  }
+  .auth-card input{
+    padding:9px 10px;
+  }
+  .auth-submit{
+    padding:10px;
+  }
+  .demo-credentials{
+    margin-top:10px;
+    padding:9px;
+  }
+  #passwordRecoveryPanel{
+    margin-top:9px !important;
+  }
+}
+
+@media (max-height:650px){
+  .auth-screen{
+    display:block;
+    padding:8px 12px;
+  }
+  .auth-card{
+    margin:0 auto;
+    padding:16px 20px;
+  }
+  .auth-brand{
+    margin-bottom:9px;
+  }
+  .auth-card h1{
+    font-size:20px;
+  }
+  .auth-help{
+    font-size:12px;
+  }
+  .auth-card form,
+  #passwordRecoveryPanel form{
+    gap:7px;
+    margin-top:8px;
+  }
+  .auth-card label{
+    gap:4px;
+  }
+  .auth-card input{
+    padding:8px 9px;
+  }
+  .demo-credentials{
+    margin-top:8px;
+  }
+}
+
+@media (max-width:480px){
+  .auth-screen{
+    padding:10px;
+  }
+  .auth-card{
+    width:100%;
+    padding:18px 16px;
+    border-radius:14px;
+  }
+}
+
+/* REN-BI 360 v2.3.2 - Recuperacao em tela propria e sem reduzir zoom */
+#loginScreen.auth-screen{
+  display:block;
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  padding:12px !important;
+}
+
+#loginScreen .auth-card{
+  width:min(430px,calc(100vw - 24px)) !important;
+  margin:0 auto 28px !important;
+  padding:22px 24px !important;
+  max-height:none !important;
+}
+
+#passwordRecoveryPanel{
+  width:100%;
+  margin-top:8px !important;
+}
+
+#passwordRecoveryPanel .recovery-box{
+  width:100%;
+}
+
+#passwordRecoveryPanel h2{
+  margin:4px 0 6px;
+  font-size:22px;
+}
+
+#passwordRecoveryPanel form{
+  display:grid;
+  gap:9px !important;
+  margin-top:12px !important;
+}
+
+#passwordRecoveryPanel label{
+  gap:4px !important;
+}
+
+#passwordRecoveryPanel input{
+  padding:9px 10px !important;
+}
+
+#passwordRecoveryPanel .auth-submit{
+  padding:9px 10px !important;
+  margin-top:0 !important;
+}
+
+@media (max-height:700px){
+  #loginScreen .auth-card{
+    padding:14px 18px !important;
+  }
+  #loginScreen .auth-brand{
+    margin-bottom:8px !important;
+  }
+  #loginScreen .brand-logo-auth{
+    max-height:42px !important;
+  }
+  #passwordRecoveryPanel h2{
+    font-size:19px;
+  }
+  #passwordRecoveryPanel .auth-help{
+    font-size:11px;
+    line-height:1.3;
+  }
+  #passwordRecoveryPanel form{
+    gap:6px !important;
+    margin-top:8px !important;
+  }
+  #passwordRecoveryPanel input{
+    padding:7px 9px !important;
+  }
+  #passwordRecoveryPanel .auth-submit{
+    padding:8px !important;
+  }
+}

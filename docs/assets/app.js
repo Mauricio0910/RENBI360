@@ -281,6 +281,8 @@ function startAutoRefresh(){
 
 function installPasswordRecoveryUI(){
   const loginForm=document.getElementById('loginForm');
+  const demoCredentials=document.getElementById('demoCredentials');
+  const loginError=document.getElementById('loginError');
   if(!loginForm || document.getElementById('recoveryToggleBtn')) return;
 
   const toggle=document.createElement('button');
@@ -293,17 +295,18 @@ function installPasswordRecoveryUI(){
   const panel=document.createElement('div');
   panel.id='passwordRecoveryPanel';
   panel.className='hidden';
-  panel.style.marginTop='14px';
   panel.innerHTML=`
-    <div style="border-top:1px solid rgba(127,127,127,.25);padding-top:14px">
+    <div class="recovery-box">
       <p class="eyebrow">RECUPERAÇÃO DE SENHA</p>
-      <p class="auth-help">Informe o usuário, a chave de recuperação do REN-BI e a nova senha.</p>
+      <h2>Trocar minha senha</h2>
+      <p class="auth-help">Informe seu usuário, a chave de recuperação do REN-BI e a nova senha.</p>
       <form id="recoveryForm">
         <label>Usuário<input id="recoveryUser" autocomplete="username" required /></label>
         <label>Chave de recuperação<input id="recoveryKey" type="password" autocomplete="off" required /></label>
         <label>Nova senha<input id="recoveryPassword" type="password" autocomplete="new-password" minlength="6" required /></label>
         <label>Confirmar nova senha<input id="recoveryPassword2" type="password" autocomplete="new-password" minlength="6" required /></label>
         <button class="primary auth-submit" type="submit">Trocar senha</button>
+        <button class="secondary auth-submit" id="backToLoginBtn" type="button">Voltar ao login</button>
       </form>
       <div id="recoveryMessage" class="form-error"></div>
     </div>`;
@@ -311,12 +314,27 @@ function installPasswordRecoveryUI(){
   loginForm.insertAdjacentElement('afterend', toggle);
   toggle.insertAdjacentElement('afterend', panel);
 
-  toggle.onclick=()=>{
-    panel.classList.toggle('hidden');
-    if(!panel.classList.contains('hidden')){
-      document.getElementById('recoveryUser').value=document.getElementById('loginUser').value.trim();
-    }
-  };
+  function showRecovery(){
+    loginForm.classList.add('hidden');
+    if(demoCredentials) demoCredentials.classList.add('hidden');
+    if(loginError) loginError.classList.add('hidden');
+    toggle.classList.add('hidden');
+    panel.classList.remove('hidden');
+    document.getElementById('recoveryUser').value=document.getElementById('loginUser').value.trim();
+    setTimeout(()=>document.getElementById('recoveryUser')?.focus(),50);
+  }
+
+  function showLogin(){
+    panel.classList.add('hidden');
+    loginForm.classList.remove('hidden');
+    if(demoCredentials) demoCredentials.classList.remove('hidden');
+    if(loginError) loginError.classList.remove('hidden');
+    toggle.classList.remove('hidden');
+    setTimeout(()=>document.getElementById('loginUser')?.focus(),50);
+  }
+
+  toggle.onclick=showRecovery;
+  document.getElementById('backToLoginBtn').onclick=showLogin;
 
   document.getElementById('recoveryForm').onsubmit=async e=>{
     e.preventDefault();
@@ -354,7 +372,8 @@ function installPasswordRecoveryUI(){
       document.getElementById('recoveryPassword').value='';
       document.getElementById('recoveryPassword2').value='';
       msg.style.color='#0a7a3d';
-      msg.textContent='Senha alterada. Agora entre com a nova senha.';
+      msg.textContent='Senha alterada com sucesso. Voltando ao login...';
+      setTimeout(showLogin,1200);
     }catch(ex){
       msg.textContent=ex.message||'Não foi possível trocar a senha.';
     }
