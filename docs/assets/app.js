@@ -14,6 +14,11 @@ let currentUser = null;
 let authToken = sessionStorage.getItem('renbi_token') || '';
 let currentLicense = null;
 
+// REN-BI 360 v2.2.0 - atualização automática completa a cada 60 segundos.
+const AUTO_REFRESH_MS = 60 * 1000;
+let autoRefreshTimer = null;
+let autoRefreshBusy = false;
+
 const money = v => new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:2}).format(Number(v)||0);
 const num = v => new Intl.NumberFormat('pt-BR').format(Number(v)||0);
 const pct = v => `${Number(v||0).toFixed(1)}%`;
@@ -62,7 +67,7 @@ async function api(path){
     let url,headers={'Accept':'application/json'};
     if(API_BASE){url=API+path;if(authToken)headers.Authorization=`Bearer ${authToken}`;}
     else{const f=resolveDemoFile(path);if(!f)throw new Error('Snapshot de demonstração não encontrado: '+path);url='./data/'+f;}
-    const r=await fetch(url,{headers});
+    const r=await fetch(url,{headers,cache:API_BASE?'no-store':'default'});
     if(r.status===401){logout();throw new Error('Sessão expirada');}
     if(r.status===402||r.status===423){const info=await r.json().catch(()=>({}));showBlocked(info.detail||info);throw new Error('Licença bloqueada');}
     if(!r.ok)throw new Error('HTTP '+r.status);
@@ -72,7 +77,7 @@ async function api(path){
 async function apiRequest(path,method='GET',body=null){
   if(!API_BASE) return null;
   const headers={'Accept':'application/json','Content-Type':'application/json'};if(authToken)headers.Authorization=`Bearer ${authToken}`;
-  const r=await fetch(API+path,{method,headers,body:body?JSON.stringify(body):undefined});
+  const r=await fetch(API+path,{method,headers,body:body?JSON.stringify(body):undefined,cache:'no-store'});
   const data=await r.json().catch(()=>({}));if(!r.ok)throw new Error(data.detail||`HTTP ${r.status}`);return data;
 }
 
@@ -239,13 +244,47 @@ function exportTablesPdf(snaps,filename='RenBI_Relatorios.pdf'){
 function printSnapshots(snaps){const w=window.open('','_blank');w.document.write(`<html><head><title>RenBI Relatórios</title><style>body{font-family:Arial;font-size:11px}table{width:100%;border-collapse:collapse;margin:8px 0 24px}th,td{border:1px solid #ccc;padding:6px}h1{page-break-before:always}h1:first-child{page-break-before:auto}.report-toolbar,button{display:none}</style></head><body>${snaps.map(s=>`<h1>${esc(s.title)}</h1>${s.node.innerHTML}`).join('')}</body></html>`);w.document.close();w.focus();setTimeout(()=>w.print(),300)}
 document.getElementById('exportBtn').onclick=async()=>{try{const scope=document.getElementById('exportScope').value,format=document.getElementById('exportFormat').value,snaps=await collectExportSnapshots(scope);if(format==='xlsx')exportTablesExcel(snaps,scope==='all'?'RenBI_Todos_Relatorios.xlsx':`RenBI_${pages[currentPage][0]}.xlsx`);else exportTablesPdf(snaps,scope==='all'?'RenBI_Todos_Relatorios.pdf':`RenBI_${pages[currentPage][0]}.pdf`);}finally{hideLoading()}};
 
+
+function stopAutoRefresh(){
+  if(autoRefreshTimer){
+    clearInterval(autoRefreshTimer);
+    autoRefreshTimer=null;
+  }
+}
+
+async function refreshCurrentPageAutomatically(){
+  if(autoRefreshBusy || !currentUser || !API_BASE || document.hidden) return;
+  if(appShell.classList.contains('hidden')) return;
+  autoRefreshBusy=true;
+  try{
+    const s=await api(filteredPath('/integration/last-sync'));
+    if(s){
+      const syncStatus=document.getElementById('syncStatus');
+      const syncDetail=document.getElementById('syncDetail');
+      if(syncStatus) syncStatus.textContent=s.status==='healthy'?'Conectado':'Atenção';
+      if(syncDetail) syncDetail.textContent=`Defasagem ${s.lag_seconds||0}s • atualização automática 60s`;
+    }
+    await go(currentPage);
+  }catch(e){
+    console.warn('Atualização automática REN-BI',e);
+  }finally{
+    autoRefreshBusy=false;
+  }
+}
+
+function startAutoRefresh(){
+  stopAutoRefresh();
+  if(!API_BASE) return;
+  autoRefreshTimer=setInterval(refreshCurrentPageAutomatically,AUTO_REFRESH_MS);
+}
+
 async function login(username,password){
  if(API_BASE){const r=await fetch(`${API}/auth/login`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username,password})});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.detail||'Usuário ou senha inválidos');authToken=d.access_token;currentUser={...(d.user||{}),role:d.user?.role||d.user?.roles?.[0]||'viewer'};sessionStorage.setItem('renbi_token',authToken);sessionStorage.setItem('renbi_user',JSON.stringify(currentUser));return;}
  const u=demoUsers().find(x=>x.username===username&&x.password===password);if(!u||!u.active)throw new Error('Usuário, senha ou status de acesso inválido.');currentUser={id:u.id,username:u.username,name:u.name,role:u.role};authToken='demo-session';sessionStorage.setItem('renbi_token',authToken);sessionStorage.setItem('renbi_user',JSON.stringify(currentUser));
 }
-async function startApp(){currentLicense=await getLicenseStatus();if(['blocked','suspended'].includes(currentLicense?.status)){showBlocked(currentLicense);return;}loginScreen.classList.add('hidden');blockedScreen.classList.add('hidden');appShell.classList.remove('hidden');document.getElementById('userName').textContent=currentUser?.name||currentUser?.username||'Usuário';document.getElementById('userRole').textContent=roleLabels[currentUser?.role]||currentUser?.role||'Perfil';applyPermissions();setReferenceInput();const s=await api(filteredPath('/integration/last-sync'));if(s){document.getElementById('syncStatus').textContent=s.status==='healthy'?'Conectado':'Atenção';document.getElementById('syncDetail').textContent=`Defasagem ${s.lag_seconds}s`;}await go(allowedPages()[0]||'overview');}
+async function startApp(){currentLicense=await getLicenseStatus();if(['blocked','suspended'].includes(currentLicense?.status)){showBlocked(currentLicense);return;}loginScreen.classList.add('hidden');blockedScreen.classList.add('hidden');appShell.classList.remove('hidden');document.getElementById('userName').textContent=currentUser?.name||currentUser?.username||'Usuário';document.getElementById('userRole').textContent=roleLabels[currentUser?.role]||currentUser?.role||'Perfil';applyPermissions();setReferenceInput();const s=await api(filteredPath('/integration/last-sync'));if(s){document.getElementById('syncStatus').textContent=s.status==='healthy'?'Conectado':'Atenção';document.getElementById('syncDetail').textContent=`Defasagem ${s.lag_seconds||0}s • atualização automática 60s`;}await go(allowedPages()[0]||'overview');startAutoRefresh();}
 function showBlocked(info){currentLicense=typeof info==='object'?info:{status:'blocked',reason:String(info)};appShell.classList.add('hidden');loginScreen.classList.add('hidden');blockedScreen.classList.remove('hidden');document.getElementById('blockedMessage').textContent=currentLicense.reason||'A licença está bloqueada por pendência financeira ou administrativa.';document.getElementById('blockedDetails').innerHTML=`<strong>Empresa:</strong> ${esc(currentLicense.company||'-')}<br><strong>Vencimento:</strong> ${esc(currentLicense.due_date||'-')}<br><strong>Carência:</strong> ${esc(currentLicense.grace_until||'-')}<br><strong>Contato:</strong> ${esc(currentLicense.billing_contact||'-')}`;const b=document.getElementById('demoUnblock');b.classList.toggle('hidden',!!API_BASE||currentUser?.role!=='superadmin');b.onclick=async()=>{const v=demoLicense();v.status='active';v.reason='';saveDemoLicense(v);currentLicense=v;await startApp();};}
-function logout(){sessionStorage.removeItem('renbi_token');sessionStorage.removeItem('renbi_user');authToken='';currentUser=null;appShell.classList.add('hidden');blockedScreen.classList.add('hidden');loginScreen.classList.remove('hidden');document.getElementById('loginPassword').value='';}
+function logout(){stopAutoRefresh();sessionStorage.removeItem('renbi_token');sessionStorage.removeItem('renbi_user');authToken='';currentUser=null;appShell.classList.add('hidden');blockedScreen.classList.add('hidden');loginScreen.classList.remove('hidden');document.getElementById('loginPassword').value='';}
 document.getElementById('loginForm').onsubmit=async e=>{e.preventDefault();const err=document.getElementById('loginError');err.textContent='';try{await login(document.getElementById('loginUser').value.trim(),document.getElementById('loginPassword').value);await startApp()}catch(ex){err.textContent=ex.message}};
 
 (async function boot(){initDemoState();document.getElementById('demoCredentials').innerHTML=API_BASE?'Autenticação conectada ao servidor RenBI.':'<strong>Modo demonstração:</strong><br>admin / RenBI@2026<br>gestor / Gestor@2026<br>financeiro / Finance@2026<br><small>Estas credenciais são públicas e servem somente para demonstração no GitHub Pages.</small>';const saved=sessionStorage.getItem('renbi_user');if(saved&&authToken){try{currentUser=JSON.parse(saved);await startApp();return}catch(e){logout()}}loginScreen.classList.remove('hidden');})();
