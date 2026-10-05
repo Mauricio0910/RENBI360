@@ -5,7 +5,7 @@
       "code": "PILOTO",
       "name": "Ambiente Atual REN-BI",
       "cnpj": "",
-      "api_base": "https://intellectual-paying-questionnaire-medicine.trycloudflare.com",
+      "api_base": "https://api-piloto.renbibase.com",
       "active": true
     }
   ]
