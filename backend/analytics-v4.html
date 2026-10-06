@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>REN-BI 360 | Analytics v4.1</title>
+<link rel="stylesheet" href="./assets/analytics-v4.css">
+</head>
+<body>
+<header><div><b>REN <span>BI</span> 360</b><small>Analytics & Inteligência Empresarial v4.1</small></div>
+<nav><a href="./">← Portal principal</a><button id="refresh">Atualizar</button></nav></header>
+<section class="filters">
+<label>Período<select id="range"><option value="1m">1 mês</option><option value="3m" selected>3 meses</option><option value="6m">6 meses</option><option value="1y">1 ano</option><option value="2y">2 anos</option><option value="3y">3 anos</option><option value="custom">Personalizado</option></select></label>
+<label class="custom">De<input id="start" type="date"></label><label class="custom">Até<input id="end" type="date"></label><div id="status">Conectando...</div>
+</section>
+<div class="tabs">
+<button data-tab="executivo" class="active">Executivo</button><button data-tab="vendas">Vendas</button><button data-tab="compras">Compras</button>
+<button data-tab="precos">Preços & Margem</button><button data-tab="abc">Curva ABC</button><button data-tab="clientes">Clientes</button>
+<button data-tab="fornecedores">Fornecedores</button><button data-tab="fiscal">Fiscal</button><button data-tab="dre">DRE</button>
+<button data-tab="pessoas">Colaboradores</button><button data-tab="perdas">Perdas & Anomalias</button>
+</div>
+<main id="content"></main>
+<script src="./assets/analytics-v4.js"></script>
+</body></html>
