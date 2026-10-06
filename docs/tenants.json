@@ -1,11 +1,18 @@
 {
-  "version": 1,
+  "version": 2,
   "clients": [
     {
       "code": "PILOTO",
       "name": "Ambiente Atual REN-BI",
       "cnpj": "",
       "api_base": "https://api-piloto.renbibase.com",
+      "active": true
+    },
+    {
+      "code": "LIBERAL",
+      "name": "LIBERAL CONSTRUÇÕES",
+      "cnpj": "",
+      "api_base": "https://api-liberal.renbibase.com",
       "active": true
     }
   ]
