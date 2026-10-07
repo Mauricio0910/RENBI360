@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>REN-BI 360 | Portal Unificado v4.3</title>
+<link rel="stylesheet" href="./assets/renbi-v43.css">
+</head>
+<body>
+<aside id="sidebar">
+  <div class="brand">
+    <div class="logo">R</div>
+    <div><b>REN <span>BI</span> 360</b><small>Portal Unificado v4.3</small></div>
+  </div>
+  <div class="company" id="companyBox">Carregando cliente...</div>
+  <nav id="menu">
+    <button data-module="executivo" class="active">▦ <span>Executivo</span></button>
+    <button data-module="vendas">▤ <span>Vendas</span></button>
+    <button data-module="compras">▥ <span>Compras</span></button>
+    <button data-module="precos">⌁ <span>Preços & Margens</span></button>
+    <button data-module="clientes">◎ <span>Clientes</span></button>
+    <button data-module="fornecedores">◇ <span>Fornecedores</span></button>
+    <button data-module="vendedores">♙ <span>Vendedores</span></button>
+    <button data-module="estoque">▣ <span>Estoque & Anomalias</span></button>
+    <button data-module="fiscal">§ <span>Fiscal</span></button>
+    <button data-module="dre">≡ <span>DRE</span></button>
+    <button data-module="tributario">% <span>Tributário</span></button>
+    <button data-module="pessoas">♚ <span>Pessoas</span></button>
+    <button data-module="prolabore">₿ <span>Pró-labore</span></button>
+    <button data-module="forecast">↗ <span>Forecast</span></button>
+    <button data-module="alertas">! <span>Alertas</span></button>
+    <button data-module="diagnostico">✓ <span>Diagnóstico</span></button>
+  </nav>
+  <div class="sidebar-bottom">
+    <a href="./analytics-v4.html">Analytics v4.1</a>
+    <a href="./strategy-v42.html">Strategy v4.2</a>
+    <a href="./">Portal clássico</a>
+  </div>
+</aside>
+
+<div id="app">
+  <header class="topbar">
+    <div>
+      <button id="menuToggle" class="icon-btn">☰</button>
+      <div class="title">
+        <small id="moduleKicker">PAINEL EXECUTIVO</small>
+        <h1 id="moduleTitle">Visão Geral</h1>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button id="csvBtn">Exportar CSV</button>
+      <button id="printBtn">Imprimir/PDF</button>
+      <button id="refreshBtn" class="primary">Atualizar</button>
+    </div>
+  </header>
+
+  <section class="filters">
+    <label>Período
+      <select id="range">
+        <option value="1m">1 mês</option>
+        <option value="3m" selected>3 meses</option>
+        <option value="6m">6 meses</option>
+        <option value="1y">1 ano</option>
+        <option value="2y">2 anos</option>
+        <option value="3y">3 anos</option>
+        <option value="custom">Personalizado</option>
+      </select>
+    </label>
+    <label class="custom">De<input id="start" type="date"></label>
+    <label class="custom">Até<input id="end" type="date"></label>
+    <div class="last-update" id="lastUpdate">Aguardando...</div>
+  </section>
+
+  <main id="content"></main>
+</div>
+
+<script src="./assets/renbi-v43.js"></script>
+</body>
+</html>
