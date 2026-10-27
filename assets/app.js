@@ -97,7 +97,7 @@ async function selectTenant(code){
   }
 
   // Acesso externo: Portal de Gestão é a fonte autoritativa.
-  if(!tenant && CENTRAL_REGISTRY){
+  if(!tenant && typeof CENTRAL_REGISTRY !== 'undefined' && CENTRAL_REGISTRY){
     try{
       const r=await fetch(`${CENTRAL_REGISTRY}/${encodeURIComponent(normalized)}?v=${Date.now()}`,{
         cache:'no-store',
