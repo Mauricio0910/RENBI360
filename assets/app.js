@@ -28,8 +28,8 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;',
 const sleep = ms => new Promise(r=>setTimeout(r,ms));
 
 const ROLE_PAGES = {
-  superadmin:['overview','sales','projections','inventory','finance','team','suppliers','analytics','market','users','integration','sped','sped_pendencias','sped_painel','sped_pendencias','sped_painel'],
-  admin:['overview','sales','projections','inventory','finance','team','suppliers','analytics','market','users','integration','sped'],
+  superadmin:['overview','sales','projections','inventory','finance','team','suppliers','analytics','market','users','integration','sped','sped_pendencias','sped_painel'],
+  admin:['overview','sales','projections','inventory','finance','team','suppliers','analytics','market','users','integration','sped','sped_pendencias','sped_painel'],
   manager:['overview','sales','projections','inventory','finance','team','suppliers','analytics','market','integration','sped','sped_pendencias','sped_painel'],
   sales:['overview','sales','projections','team'],
   finance:['overview','projections','finance','suppliers'],
@@ -323,7 +323,7 @@ function spedQuery(start,end,branch){const p=new URLSearchParams({start,end});if
 function spedDate(v){return String(v||'').slice(0,10).split('-').reverse().join('/');}
 async function renderSped(){
   const now=new Date(); const year=Number(referenceInput?.value?.slice(0,4))||now.getFullYear();
-  content.innerHTML=`${section('Auditoria SPED — dados fiscais operacionais','Consulta direta ao SuperSCE. Os registros não comprovam geração ou transmissão de SPED.')}
+  content.innerHTML=`${section('Auditoria SPED — dados fiscais operacionais','Consulta direta ao SuperSCE. Os registros não comprovam geração ou transmissão de SPED.')}<div class="card"><div class="form-row"><button type="button" class="secondary" data-go="sped_pendencias">Gestão de Pendências</button><button type="button" class="secondary" data-go="sped_painel">Painel Gerencial Fiscal</button></div><p class="note">As pendências registradas são acompanhadas separadamente dos alertas calculados nas consultas.</p></div>
   <div class="card"><div class="form-row"><label>Início <input id="spedStart" type="date" value="${year}-01-01"></label><label>Fim <input id="spedEnd" type="date" value="${year}-12-31"></label><label>Filial (opcional) <input id="spedBranch" type="number" min="0" placeholder="Todas"></label><button class="primary" id="spedRun">Consultar</button></div><p class="note" id="spedMessage">Selecione o período e clique em Consultar.</p></div><div id="spedResults"></div>`;
   document.getElementById('spedRun').onclick=loadSped;
   await loadSped();
