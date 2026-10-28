@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>REN-BI 360 v5.7 | Gestão Gerencial</title>
+  <link rel="stylesheet" href="./assets/renbi-v57.css">
+</head>
+<body>
+
+<section id="login" class="login-screen">
+  <div class="login-card">
+    <img class="login-logo" src="./assets/renbi360-logo.png" alt="RENBI360">
+    <div class="login-badge">REN-BI 360 • V5.9.1.2.3 GERENCIAL</div>
+    <h1>Inteligência para decisão</h1>
+    <p>Use o código da empresa e suas credenciais do RENBI360.</p>
+    <form id="loginForm">
+      <label>Empresa<input id="company" autocomplete="organization" required placeholder="Ex.: LIBERAL"></label>
+      <label>Usuário<input id="username" autocomplete="username" required></label>
+      <label>Senha<input id="password" type="password" autocomplete="current-password" required></label>
+      <button class="primary" type="submit">Entrar</button>
+    </form>
+    <div id="loginError" class="login-error"></div>
+  </div>
+</section>
+
+<div id="shell" class="shell hidden">
+  <aside class="sidebar">
+    <div class="brand-wrap">
+      <div class="brand-logo-box"><img class="brand-logo-img" src="./assets/renbi360-logo.png" alt="RENBI360"></div>
+      <div class="preview-tag">V5.9.1 • HOJE EM TEMPO REAL</div>
+    </div>
+
+    <nav id="nav">
+      <button class="nav active" data-page="overview"><span>◉</span>Visão Geral</button>
+      <button class="nav" data-page="sales"><span>↗</span>Vendas</button>
+      <button class="nav" data-page="projections"><span>⌁</span>Projeções</button>
+      <button class="nav" data-page="purchases"><span>▣</span>Compras & Estoque</button>
+      <button class="nav" data-page="products"><span>◆</span>Produtos & Margem</button>
+      <button class="nav" data-page="customers"><span>◎</span>Clientes</button>
+      <button class="nav" data-page="team"><span>♟</span>Equipe & Metas</button>
+      <button class="nav" data-page="suppliers"><span>▤</span>Fornecedores</button>
+      <button class="nav" data-page="reservations"><span>▦</span>Reserva & Entrega</button>
+      <button class="nav" data-page="finance"><span>₿</span>Financeiro</button>
+      <button class="nav" data-page="dre"><span>Σ</span>DRE</button>
+      <button class="nav" data-page="tax"><span>%</span>Tributário</button>
+      <button class="nav" data-page="taxcompare"><span>≋</span>Comparativo Tributário</button>
+      <button class="nav" data-page="insights"><span>✦</span>Insights Gerenciais</button>
+      <button class="nav" data-page="alerts"><span>!</span>Perdas & Alertas</button>
+    </nav>
+
+    <div class="sidebar-intel">
+      <div class="bulb">✦</div>
+      <strong>Análise gerencial</strong>
+      <small>Resumo rápido + paginação + cache sobre o backend homologado.</small>
+    </div>
+    <div class="sidebar-foot"><i class="dot"></i><span>Analytics automático</span></div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <h1 id="pageTitle">Visão Geral</h1>
+        <p id="pageSub">Receita, resultado, caixa e decisões prioritárias.</p>
+      </div>
+      <div class="top-right">
+        <div class="company-chip">Empresa: <b id="companyName">—</b></div>
+        <div class="user-chip"><div class="avatar">R</div><div><b id="userName">Usuário</b><small id="userRole"></small></div></div>
+        <button id="logoutBtn" class="secondary">Sair</button>
+      </div>
+    </header>
+
+    <section class="filterbar">
+      <div class="period-group">
+        <b>Período</b>
+        <button data-preset="day">Dia</button>
+        <button data-preset="week">Semana</button>
+        <button data-preset="1m">1 mês</button>
+        <button data-preset="3m" class="active">3 meses</button>
+        <button data-preset="6m">6 meses</button>
+        <button data-preset="1y">12 meses</button>
+        <button data-preset="custom">Personalizado</button>
+      </div>
+
+      <input id="dayDate" type="date" class="hidden">
+      <div id="customDates" class="custom-dates hidden">
+        <input id="startDate" type="date">
+        <span>até</span>
+        <input id="endDate" type="date">
+      </div>
+
+      <div class="product-filter">
+        <input id="productSearch" list="productsList" placeholder="Filtrar produto...">
+        <datalist id="productsList"></datalist>
+        <button id="clearProduct" class="secondary">Limpar</button>
+      </div>
+<div class="filter-actions">
+        <span class="cache-badge">Analytics: 5 min</span>
+        <button id="refreshBtn" class="secondary">Atualizar</button>
+      </div>
+    </section>
+
+    <div id="contextBar" class="context"></div>
+    <section id="content" class="content"></section>
+  </main>
+</div>
+
+<script src="./assets/renbi-v57.js"></script>
+<script src="./assets/renbi-fiscal-v57.js?v=1"></script>
+</body>
+</html>
